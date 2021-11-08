@@ -6,7 +6,7 @@ A decription below of most of the features in this integration (most of it in No
 For further details about your ventilation unit, read the applicable manual by Systemair.
 
 -	System overview: Showing speed, temperatures, moisture, ppm, efficiency (estimated), power (consumption and estimated added power), actual mode and A/B/C alarms.
-- ![System overview!](C:\Users\Nora\Documents\GitHub\Homeassistant-NodeRed-Systemair-VTR300\Views\VTR300_system_overview.png)
+![System overview!](C:\Users\Nora\Documents\GitHub\Homeassistant-NodeRed-Systemair-VTR300\Views\VTR300_system_overview.png)
 -	UI setup: Picture element and custom:text-element(thanks to @ludeeus).
 ```
 elements:
