@@ -99,14 +99,14 @@ This is where the setpoints is given for PPM Auto mode and economic feature, the
 ### Auto Schedule 
 This is where the setpoints is given for the Auto mode (Auto schedule), where Sch.1 (Schedule 1) and Sch.2 (Schedule 2) is two schedules configurations that can be configured for each day.
 - ![VTR300_auto_schedule_popup](https://github.com/GMTrevis/Homeassistant-NodeRed-Systemair-VTR300/blob/main/Views/VTR300_auto_schedule_popup.png)
-- Aktuell modus (Actual mode):** This only displays the actual mode.
-- Hast./Speed (Sch1/Sch.2):** Drop down menu to choose the requested speed for Sch.1 and Sch.2. (Low, Normal and High speed). Each schedule is active if within given time range and if set to “Active”.
-- Offset (Sch1/Sch.2):** Supply/extract air temperature offset if you want the supply/extract air to be reduced when schedules are active or inactive. 
-- Sch1. Start:** Start time (setpoint) for when you want Sch.1 to activate. 
-- Sch1. Stopp:** Stop time (setpoint) for when you want Sch.1 to become inactive.
-- Sch1.:** Must be given as “Aktiv”(Active) if the ventilation unit to run according to the given time schedule channel. If “Av”(Off), the given time schedule channel will be ingored and the ventilation unit will run according to the previous given time schedule channel.
+- **Aktuell modus (Actual mode):** This only displays the actual mode.
+- **Hast./Speed (Sch1/Sch.2):** Drop down menu to choose the requested speed for Sch.1 and Sch.2. (Low, Normal and High speed). Each schedule is active if within given time range and if set to “Active”.
+- **Offset (Sch1/Sch.2):** Supply/extract air temperature offset if you want the supply/extract air to be reduced when schedules are active or inactive. 
+- **Sch1. Start:** Start time (setpoint) for when you want Sch.1 to activate. 
+- **Sch1. Stopp:** Stop time (setpoint) for when you want Sch.1 to become inactive.
+- **Sch1.:** Must be given as “Aktiv”(Active) if the ventilation unit to run according to the given time schedule channel. If “Av”(Off), the given time schedule channel will be ingored and the ventilation unit will run according to the previous given time schedule channel.
 The same applies to all other days for Sch.1 and Sch.2.
-- **Note!** The system time and date for the ventilation unit must be correct for the schedule feature to work according to your time zone.
+**Note!** The system time and date for the ventilation unit must be correct for the schedule feature to work according to your time zone.
 
 ### Varighet (Duration)
 - ![VTR300_mode_duration_popup](https://github.com/GMTrevis/Homeassistant-NodeRed-Systemair-VTR300/blob/main/Views/VTR300_mode_duration_popup.png)
