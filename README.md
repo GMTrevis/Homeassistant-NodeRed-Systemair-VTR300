@@ -5,9 +5,9 @@ Sytemair VTR300++ integration to Homeassistant, modbus R/W is handled in Node Re
 A decription below of most of the features in this integration (most of it in Norwegian).
 For further details about your ventilation unit, read the applicable manual by Systemair.
 
--	System overview: Showing speed, temperatures, moisture, ppm, efficiency (estimated), power (consumption and estimated added power), actual mode and A/B/C alarms.
-- ![VTR300_system_overview](https://user-images.githubusercontent.com/69414078/140724408-cf12fe03-ffba-41cf-8b2b-23cc5718db4d.png)
--	UI setup: Picture element and custom:text-element(thanks to @ludeeus).
+###	System overview: Showing speed, temperatures, moisture, ppm, efficiency (estimated), power (consumption and estimated added power), actual mode and A/B/C alarms.
+![VTR300_system_overview](https://user-images.githubusercontent.com/69414078/140724408-cf12fe03-ffba-41cf-8b2b-23cc5718db4d.png)
+UI setup: Picture element and custom:text-element(thanks to @ludeeus).
 ```
 elements:
   - entity: sensor.tp_link_vtr300_watts
