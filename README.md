@@ -241,6 +241,12 @@ This is not as smooth as I would like it to be as it is a manual installation, b
 - switches_vtr300
 - customize_vtr300 (If you want icon state changes, the ppm entities must be adapted to your setup)
 - customize_global (If you want icon state changes)
+#### UI .png files
+Copy the .png files to your dedicated "picture" folder, I have mine in the following folders www -> images -> VTR300
+- VTR300_flytskjema_A
+- VTR300_utekomp_03e
+- VTR300_utekomp_tilluft_B
+	
 #### Import the following Node Red flows:
 - vtr300.json
 - glob_time.json
