@@ -1,7 +1,10 @@
 # Homeassistant-NodeRed-Systemair-VTR300
 Sytemair Save VTR300 integration to Homeassistant, modbus R/W is handled in Node Red.
 - **Mobile view**
-- VTR300_mobileView.mp4
+https://user-images.githubusercontent.com/69414078/140788652-341a1d53-b56f-461f-85dd-b349424d7963.mp4
+
+https://user-images.githubusercontent.com/69414078/140788687-d45e4cbd-352a-48d4-a690-b0cef9e9948a.mp4
+
 ## Functionality and features in HA:
 A decription below of most of the features in this integration (most of it in Norwegian).
 For further details about your ventilation unit, read the applicable manual by Systemair.
