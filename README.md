@@ -11,10 +11,10 @@ For further details about your ventilation unit, read the applicable manual by S
 - ![VTR300_system_overview](https://user-images.githubusercontent.com/69414078/140724408-cf12fe03-ffba-41cf-8b2b-23cc5718db4d.png)
 
 ###	Mode control buttons: 
-- Showing state of the actual mode and the current setting/actual time remaining for the applicable “timer modes”. All mode buttons have confirm feature when being set.
-- UI setup: Custom button card (thanks to @RomRider), entity card and custom:home-feed-card (thanks to @gadgetchnnel). See folder "UI_Config" --> "UI_Mode_control_buttons.txt" for UI config.
-- LEGG TIL BILDE!
-- Auto: “Auto schedule”, when active the ventilation speed are running according to the speed given in the schedule properties, ref. pop-up “Auto Sch.”, further displayed in chapter “Pop-up’s”.
+Showing state of the actual mode and the current setting/actual time remaining for the applicable “timer modes”. All mode buttons have confirm feature when being set.
+- **UI setup:** Custom button card (thanks to @RomRider), entity card and custom:home-feed-card (thanks to @gadgetchnnel). See folder "UI_Config" --> "UI_Mode_control_buttons.txt" for UI config.
+- ![VTR300_mode_control_buttons](https://github.com/GMTrevis/Homeassistant-NodeRed-Systemair-VTR300/blob/main/Views/VTR300_mode_control_buttons.png)
+- **Auto: “Auto schedule”:**: When active the ventilation speed are running according to the speed given in the schedule properties, ref. pop-up “Auto Sch.”, further displayed in chapter “Pop-up’s”.
 - PPM Auto: This is an additional control handled in Node Red which sets the speed of the ventilation unit based on moisture (priority), ppm and presence detection, limits are given in the pop-up “Luftkvalitet”(Air quality) further displayed in chapter “Pop-up’s”.  Modes controlled in Node Red are, Manual low, Manual normal, Manual high and Boost.
 - Borte (Away): Time limits are given in the pop-up “Varighet” (Duration) further displayed in chapter “Pop-up’s”.
 - Ferie (Vacation): Time limits are given in the pop-up “Varighet” (Duration) further displayed in chapter “Pop-up’s”.
