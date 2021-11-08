@@ -1,0 +1,229 @@
+##############################################################################################################################################################
+##################################################################---- SWITCHES ----##########################################################################
+##############################################################################################################################################################
+
+
+#---------------------------------------------------------- VTR300 - Modbus R/W via Node-Red -----------------------------------------------------------------
+
+
+
+#-------------------------VTR300 AUTO MODUS (intern ur)------------------------------------------------------------- SWITCH TEMPLATE--------------------------- 
+#Bruker input_bollean som dummy status for å trigge script for å kunne lese/skrive, ikke mulig å skrive riktig modus via modbus switch
+- platform: template
+  switches:
+    vtr300_auto_modus:
+      friendly_name: Auto modus 
+      value_template: "{{ is_state('sensor.vtr300_modus_status', 'Auto schedule - Lav') or is_state('sensor.vtr300_modus_status', 'Auto schedule - Normal') or is_state('sensor.vtr300_modus_status', 'Auto schedule - Høy')  }}"
+      turn_on:
+#         Kall script for aktivere auto modus (skriver til modbus holding reg.)
+        - service: script.vtr300_auto_modus
+          data:
+            action: "on"
+      turn_off:
+#         Kall script for deaktivere auto modus (skriver kun til "dummy" input boolean for å mulig gjøre ønsket funsksjonalitet)
+        - service: script.vtr300_auto_dummy_av
+          data:
+            action: "off"
+#-------------------------VTR300 PARTY MODUS----------------------------------------------------------------------- SWITCH TEMPLATE--------------------------- 
+    vtr300_party_modus:
+      friendly_name: Party modus 
+      value_template: "{{ is_state('sensor.vtr300_modus_status', 'Party')  }}"      
+      turn_on:
+        - service: script.vtr300_party_modus
+          data:
+            action: "on"
+      turn_off:
+        - service: script.vtr300_party_dummy_av
+          data:
+            action: "off"             
+#-------------------------VTR300 BOOST MODUS----------------------------------------------------------------------- SWITCH TEMPLATE--------------------------- 
+    vtr300_boost_modus:
+      friendly_name: Boost modus         
+      value_template: "{{ is_state('sensor.vtr300_modus_status', 'Boost')  }}"   
+      turn_on:
+        - service: script.vtr300_boost_modus
+          data:
+            action: "on"
+      turn_off:
+        - service: script.vtr300_boost_dummy_av
+          data:
+            action: "off"
+#-------------------------VTR300 ILDSTED MODUS------------------------------------------------------------------------ SWITCH TEMPLATE--------------------------- 
+    vtr300_ildsted_modus:
+      friendly_name: Ildsted modus         
+      value_template: "{{ is_state('sensor.vtr300_modus_status', 'Ildsted')  }}"     
+      turn_on:
+        - service: script.vtr300_ildsted_modus
+          data:
+            action: "on"
+      turn_off:
+        - service: script.vtr300_ildsted_dummy_av
+          data:
+            action: "off"
+#-------------------------VTR300 BORTE MODUS----------------------------------------------------------------------- SWITCH TEMPLATE--------------------------- 
+    vtr300_borte_modus:
+      friendly_name: Borte modus         
+      value_template: "{{ is_state('sensor.vtr300_modus_status', 'Borte')  }}"
+      turn_on:
+        - service: script.vtr300_borte_modus
+          data:
+            action: "on"
+      turn_off:
+        - service: script.vtr300_borte_dummy_av
+          data:
+            action: "off"
+#-------------------------VTR300 FERIE MODUS-------------------------------------------------------------------- SWITCH TEMPLATE--------------------------- 
+    vtr300_ferie_modus:
+      friendly_name: Ferie modus         
+      value_template: "{{ is_state('sensor.vtr300_modus_status', 'Ferie') }}"
+      turn_on:
+        - service: script.vtr300_ferie_modus
+          data:
+            action: "on"
+      turn_off:
+        - service: script.vtr300_ferie_dummy_av
+          data:
+            action: "off"
+#-------------------------VTR300 MANUELL STOPP (Off) MODUS---------------------------------------------------------- SWITCH TEMPLATE--------------------------- 
+    vtr300_man_stopp_modus:
+      friendly_name: Manuell stopp        
+      value_template: "{{ is_state('sensor.vtr300_modus_status', 'Manuell STOPP') }}"
+      turn_on:
+        - service: script.vtr300_man_stopp_modus
+          data:
+            action: "on"    
+      turn_off:
+        - service: script.vtr300_man_stopp_dummy_av
+          data:
+            action: "off"
+#-------------------------VTR300 MANUELL LAV MODUS------------------------------------------------------------------ SWITCH TEMPLATE--------------------------- 
+    vtr300_man_lav_modus:
+      friendly_name: Lav hastighet        
+#      value_template: "{{ is_state('sensor.vtr300_modus_status', 'Manuell Lav') or is_state('sensor.vtr300_modus_status', 'Auto schedule - Lav') or is_state('sensor.vtr300_modus_status', 'PPM Auto - Lav') }}"
+      value_template: "{{ is_state('sensor.vtr300_modus_status', 'Manuell Lav') or is_state('sensor.vtr300_modus_status', 'Auto schedule - Lav') or is_state('sensor.vtr300_modus_status', 'PPM Auto - Lav') or is_state('sensor.vtr300_modus_status', 'PPM Auto - Borte (Lav)') }}"
+      turn_on:
+        - service: script.vtr300_man_lav_modus  
+          data:
+            action: "on"
+      turn_off:
+        - service: script.vtr300_man_lav_dummy_av
+          data:
+            action: "off"
+                            
+#-------------------------VTR300 MANUELL NORMAL MODUS--------------------------------------------------------------- SWITCH TEMPLATE--------------------------- 
+    vtr300_man_normal_modus:
+      friendly_name: Normal hastighet    
+#      value_template: "{{ is_state('sensor.vtr300_modus_status', 'Manuell Normal') or is_state('sensor.vtr300_modus_status', 'Auto schedule - Normal') or is_state('sensor.vtr300_modus_status', 'PPM Auto - Normal') }}"          
+#      value_template: "{{ is_state('sensor.vtr300_modus_status', 'Manuell Normal') or is_state('sensor.vtr300_modus_status', 'Auto schedule - Normal') or is_state('sensor.vtr300_modus_status', 'PPM Auto - Normal') or is_state('sensor.vtr300_modus_status', 'Fuktoverstyring - Normal') }}" 
+      value_template: "{{ is_state('sensor.vtr300_modus_status', 'Manuell Normal') or is_state('sensor.vtr300_modus_status', 'Frikjøler - Normal')  or is_state('sensor.vtr300_modus_status', 'Auto schedule - Normal') or is_state('sensor.vtr300_modus_status', 'PPM Auto - Normal') or is_state('sensor.vtr300_modus_status', 'Fuktoverstyring - Normal') }}" 
+      turn_on:
+        - service: script.vtr300_man_normal_modus 
+          data:
+            action: "on"    
+      turn_off:
+        - service: script.vtr300_man_normal_dummy_av
+          data:
+            action: "off"
+              
+#-------------------------VTR300 MANUELL HØY MODUS------------------------------------------------------------------ SWITCH TEMPLATE--------------------------- 
+    vtr300_man_hoy_modus:
+      friendly_name: Høy hastighet       
+#      value_template: "{{ is_state('sensor.vtr300_modus_status', 'Manuell Høy') or is_state('sensor.vtr300_modus_status', 'Auto schedule - Høy') or is_state('sensor.vtr300_modus_status', 'PPM Auto - Høy') }}"            
+#      value_template: "{{ is_state('sensor.vtr300_modus_status', 'Manuell Høy') or is_state('sensor.vtr300_modus_status', 'Auto schedule - Høy') or is_state('sensor.vtr300_modus_status', 'PPM Auto - Høy') or is_state('sensor.vtr300_modus_status', 'Fuktoverstyring - Høy') }}"
+      value_template: "{{ is_state('sensor.vtr300_modus_status', 'Manuell Høy') or is_state('sensor.vtr300_modus_status', 'Frikjøler - Høy')   or is_state('sensor.vtr300_modus_status', 'Auto schedule - Høy') or is_state('sensor.vtr300_modus_status', 'PPM Auto - Høy') or is_state('sensor.vtr300_modus_status', 'Fuktoverstyring - Høy') }}"        
+      turn_on:
+        service: script.vtr300_man_hoy_modus
+        data:
+          action: "on"    
+      turn_off:
+        service: script.vtr300_man_hoy_dummy_av
+        data:
+          action: "off"              
+
+#------------------------- VTR300 - PPM AUTO MODE - Modus styrt av HA ---------------------------------------------- SWITCH TEMPLATE--------------------------- !!!!!! TESTES!!!!!!!!!!!!!!!!!!!!!!!!!!
+    vtr300_ppm_mode_auto_enable:
+      friendly_name: PPM Auto Modus 
+      value_template: "{{ is_state('input_boolean.vtr300_ppm_mode_auto_enable_modus_status_dummy', 'on') }}"          
+#      availability_template: "{{ is_state('sensor.netatmo', 'Offline') }}"
+      turn_on:
+        service: script.vtr300_ppm_mode_auto_on
+        data:
+          action: "on"    
+      turn_off:
+        service: script.vtr300_ppm_mode_auto_off
+        data:
+          action: "off"    
+#-------Utilgjengelig dersom Netatmo er offline
+
+#------------------------- VTR300 - Eco Mode ---------------------------------------------------------------------- SWITCH TEMPLATE---------------------------
+#---------------------------------- All Modbus R/W håndteres fra Node-Red! ------------------------------------------------- 
+#---------------------------------- Må trigge script for å muliggjøre faktisk status av Eco mode på knapp... -------------------------------------------------
+#---------------------------------- For å kunne trigge script må "switch" og definert "Value template" stemme overens. ---------------------------------------
+#---------------------------------- Eks. for å kunne trigge "turn_off" script, må "value_template" ha definert tilstand som gitt. ---------------------------- 
+#---------------------------------- Dersom "Eco state" ikke tilsvarer "switch.Eco mode" får man ikke skrevet script pga. missmatch mot "Value template". -----
+    vtr300_eco_mode:
+      friendly_name: Eco mode
+      value_template: "{{ is_state('binary_sensor.vtr300_eco_mode_state', 'on') }}"          
+      turn_on:
+        service: script.vtr300_eco_mode_enable
+        data:
+          action: "on"    
+      turn_off:
+        service: script.vtr300_eco_mode_disable
+        data:
+          action: "off"   
+      icon_template: >-
+        {% if is_state('binary_sensor.vtr300_eco_mode_state', 'on') %}
+          mdi:leaf
+        {% else %}
+          mdi:leaf-off
+        {% endif %}  
+        
+#------------------------- VTR300 - Sync Inernal clock ---------------------------------------------------------------------- SWITCH TEMPLATE---------------------------
+# Set time switch is interlocked if minute absolute value > 5 min
+    vtr300_set_system_time:
+      friendly_name: Sync. klokke
+      value_template: "{{ is_state('input_boolean.vtr300_set_system_time_dummy', 'on') }}"     
+      availability_template: "{{ is_state('sensor.vtr300_intern_ur_allow_clk_adj', 'true') }}"    
+      turn_on:
+        service: script.vtr300_set_system_time_enable
+        data:
+          action: "on"    
+      turn_off:
+        service: script.vtr300_set_system_time_disable
+        data:
+          action: "off"   
+      icon_template: >-
+        {% if is_state('input_boolean.vtr300_set_system_time_dummy', 'on') %} 
+          mdi:clock-in
+        {% elif is_state('sensor.vtr300_intern_ur_allow_clk_adj', 'true') %} 
+          mdi:clock-alert -outline        
+        {% else %}
+          mdi:clock-check-outline
+        {% endif %}     
+        
+#------------------------- VTR300 - Frikjøling/Nattkjøling ----------------------------------------------------------------- SWITCH TEMPLATE---------------------------
+    vtr300_freecooling:
+      friendly_name: Frikjøling/nattkjøling
+      value_template: "{{ is_state('sensor.vtr300_freecooling_state', 'Kjøler') or is_state('sensor.vtr300_freecooling_state', 'Standby') }}"   
+      turn_on:
+        service: script.vtr300_freecooling_on
+        data:
+          action: "on"    
+      turn_off:
+        service: script.vtr300_freecooling_off
+        data:
+          action: "off"   
+ 
+#------------------------- VTR300 - Kjølegjenvinning ------------------------------------------------------------------------- SWITCH TEMPLATE---------------------------
+    vtr300_cooling_recovery:
+      friendly_name: Kjølegjenvinning
+      value_template: "{{ is_state('input_boolean.vtr300_cooling_recovery_dummy', 'on') }}"       
+      turn_on:
+        service: script.vtr300_cooling_recovery_on
+        data:
+          action: "on"    
+      turn_off:
+        service: script.vtr300_cooling_recovery_off
+        data:
+          action: "off"                   

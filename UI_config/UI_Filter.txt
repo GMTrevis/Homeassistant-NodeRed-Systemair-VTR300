@@ -1,0 +1,6 @@
+type: vertical-stack
+cards:
+  - type: entity
+    entity: sensor.vtr300_tid_til_filterbytte
+    name: Neste filterskift
+  - type: custom:home-feed-card

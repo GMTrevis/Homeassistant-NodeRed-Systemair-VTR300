@@ -1,0 +1,43 @@
+type: vertical-stack
+cards:
+  - type: custom:simple-thermostat
+    entity: climate.vtr300_tilluft_sp
+    decimals: '0'
+    step_size: '1'
+    step_layout: column
+    sensors:
+      - entity: sensor.vtr300_utekomp_temp_calc
+        name: Kalkulert
+      - entity: sensor.utetemp_sensor_valgt
+        name: Aktiv utetemp
+      - entity: sensor.utetemp_sensor_status
+        name: Auto valg
+      - entity: sensor.ppm_sensor_selected_state
+        name: Auto valg
+      - entity: sensor.vtr300_modus_status
+        name: Modus
+      - entity: input_select.vtr300_reg_metode
+        name: Ønsket reg.
+      - entity: sensor.vtr300_sommer_vinter_driftstatus
+        name: Type
+    faults:
+      - entity: sensor.vtr300_a_alm
+        icon: ''
+      - entity: sensor.vtr300_b_alm
+        icon: ''
+      - entity: sensor.vtr300_c_alm
+        icon: ''
+    toggle_entity:
+      entity_id: input_boolean.vtr300_utekomp_tilluft_reg
+      name: Utekomp. tilluft
+    control:
+      hvac:
+        heat: true
+        'off':
+          name: Gjenv. AV
+          icon: mdi:atom-variant
+        'on':
+          name: true
+          icon: ''
+    show_header: true
+    name: VTR300

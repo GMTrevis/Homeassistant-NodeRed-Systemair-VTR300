@@ -1,0 +1,13 @@
+type: vertical-stack
+cards:
+  - type: history-graph
+    title: Effekt <- 48t
+    hours_to_show: 48
+    refresh_interval: 0
+    entities:
+      - entity: sensor.tp_link_vtr300_watts
+        name: Forbruk
+      - entity: sensor.vtr300_faktisk_tilfort_watt
+        name: Fakt. tilført
+      - entity: sensor.vtr300_tilfort_watt
+        name: Tilført

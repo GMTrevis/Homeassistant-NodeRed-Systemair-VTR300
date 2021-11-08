@@ -1,0 +1,22 @@
+cards:
+  - type: horizontal-stack
+    cards:
+      - type: custom:mini-graph-card
+        entities:
+          - entity: sensor.vtr300_faktisk_tilfort_kwh_daily_kr
+            color: green
+            name: Faktisk tilført (tilført - forbr.)
+          - entity: sensor.vtr300_tilfort_kwh_daily_kr
+            color: lightgreen
+            name: Tilført
+          - entity: sensor.vtr300_forbruk_kwh_daily_kr
+            color: red
+            name: Forbruk
+        icon: mdi:cash-multiple
+        name: Kr siste 7 dager
+        hours_to_show: 168
+        aggregate_func: max
+        group_by: date
+        show:
+          graph: bar
+type: vertical-stack

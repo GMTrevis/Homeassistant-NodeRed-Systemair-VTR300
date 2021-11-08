@@ -1,0 +1,250 @@
+#*************************************************************************************************************************************************************
+#--------------------------------------------------------------------- CUSTOMIZE - VTR300 -------------------------------------------------------------------*
+#*************************************************************************************************************************************************************
+
+
+#*******************************************************************
+#--------------- VTR300 - Modbus R/W via Node-Red -----------------*
+#*******************************************************************
+
+sensor.netatmo_netatmo_indoor_co2:
+  friendly_name: Netatmo stue
+  templates:
+    icon_color: >     
+      if (state < 1000) return 'green';         
+      if (state < 1500) return 'yellow'; 
+      return 'red';         
+  hide_attributes:
+    - templates
+    - icon
+    - icon_color
+    
+sensor.scd30_1_co2:
+  friendly_name: SCD30 soverom
+  templates:
+    icon_color: >     
+      if (state < 1000) return 'green';         
+      if (state < 1500) return 'yellow'; 
+      return 'red';         
+  hide_attributes:
+    - templates
+    - icon
+    - icon_color   
+
+sensor.ppm_sensor_selected:
+  friendly_name: Aktiv ppm sensor
+  templates:
+    icon_color: >     
+      if (state < 1000) return 'green';         
+      if (state < 1500) return 'yellow'; 
+      return 'red';         
+  hide_attributes:
+    - templates
+    - icon
+    - icon_color        
+
+sensor.netatmo_netatmo_indoor_humidity:
+  friendly_name: Netatmo soverom
+  templates:
+    icon: >
+      if (state > 65) return 'hass:water-percent-alert';
+      return 'hass:water-percent';  
+    icon_color: >
+      if (state < 55) return 'green';         
+      if (state < 65) return 'yellow';           
+      return 'red';
+  hide_attributes:
+    - templates
+    - icon
+    - icon_color
+    
+sensor.vtr300_relativ_fukt_avtrekk:  
+  friendly_name: Relativ fukt avtrekk
+  templates:
+    icon: >
+      if (state > 65) return 'hass:water-percent-alert';
+      return 'hass:water-percent';  
+    icon_color: >
+      if (state < 55) return 'green';         
+      if (state < 65) return 'yellow';           
+      return 'red';
+  hide_attributes:
+    - templates
+    - icon
+    - icon_color
+    
+sensor.vtr300_el_kolbe_padrag:  
+  friendly_name: El. varmer pådrag
+  templates:
+    icon: >
+      if (state > 1) return 'mdi:radiator';
+      return 'mdi:radiator-disabled';  
+    icon_color: >
+      if (state > 1) return 'red';           
+      return 'grey';
+  hide_attributes:
+    - templates
+    - icon
+    - icon_color
+    
+climate.vtr300_tilluft_sp:
+  friendly_name: Tilluft
+  templates:  
+    icon: >
+      return 'mdi:atom-variant';    
+    icon_color: >
+      if (state == 'heat') return 'green';   
+      if (state == 'cool') return 'blue';           
+      if (state == 'idle') return 'grey';  
+      if (state == 'off') return 'grey';         
+      return 'red';
+  hide_attributes:
+    - templates
+    - icon
+    - icon_color
+    
+sensor.vtr300_cooling_recovery_states:
+  friendly_name: Kjølegjenvinning
+  templates:  
+    icon_color: >
+      if (state == 'Kjøler') return 'blue';   
+      if (state == 'Standby') return 'yellow';           
+      if (state == 'Av') return 'grey';          
+      return 'red';    
+  hide_attributes:
+    - templates
+    - icon_color
+    
+switch.vtr300_cooling_recovery:
+  friendly_name: Kjølegjenvinning
+  templates:    
+    icon: >
+      return 'mdi:snowflake';  
+#    icon_color: >
+#      if (entities['sensor.vtr300_cooling_recovery_states'].state == 'Kjøler') return 'blue';      
+#      if (entities['sensor.vtr300_cooling_recovery_states'].state == 'Standby') return 'white';     
+#      if (entities['sensor.vtr300_cooling_recovery_states'].state == 'Av') return 'grey';        
+#      return 'red';          
+  hide_attributes:
+    - templates
+    - icon
+    
+sensor.vtr300_freecooling_state:
+  friendly_name: Frikjøling
+  templates:  
+    icon_color: >
+      if (state == 'Kjøler') return 'blue';   
+      if (state == 'Standby') return 'yellow';           
+      if (state == 'Av') return 'grey';          
+      return 'red';     
+  hide_attributes:
+    - templates
+    - icon_color      
+
+switch.vtr300_freecooling:
+  friendly_name: Frikjøling
+  templates:  
+    icon: >
+      return 'mdi:snowflake-variant';    
+#    icon_color: >
+#      if (entities['sensor.vtr300_freecooling_state'].state == 'Kjøler') return 'blue';      
+#      if (entities['sensor.vtr300_freecooling_state'].state == 'Standby') return 'white';     
+#      if (entities['sensor.vtr300_freecooling_state'].state == 'Av') return 'grey';                 
+#      return 'red';    
+  hide_attributes:
+    - templates
+    - icon
+    
+#input_boolean.vtr300_utekomp_tilluft_reg:
+#  friendly_name: Utekomp.
+#  templates:    
+#    icon: >
+#      return 'mdi:chart-bell-curve-cumulative';    
+#    icon_color: >
+#      if (state == 'on') return 'green';            
+#      return 'grey';        
+      
+#switch.vtr300_set_system_time:
+#  friendly_name: Sync. klokke
+#  templates:
+#    icon_color: >
+#      if (entities['input_boolean.vtr300_set_system_time_dummy']state == 'on') return 'yellow';  
+#      if (entities['sensor.vtr300_intern_ur_allow_clk_adj']state == 'true') return 'red';                 
+#      return 'green';              
+
+input_boolean.vtr300_utekomp_tilluft_reg:
+  friendly_name: Utekompensert tilluftsregulering
+  templates:  
+    icon_color: >
+      if (state == 'on') return 'yellow';            
+      return 'grey';    
+  hide_attributes:
+    - templates
+    - icon
+    - icon_color
+    
+input_select.vtr300_fan_supply_man_override:
+  friendly_name: Tilluftsvifte overstyring hast.
+  templates:  
+    icon: >
+      if (state == 'Auto') return 'mdi:fan-auto';
+      return 'mdi:fan-alert';    
+    icon_color: >
+      if (state == 'Auto') return 'grey'; 
+      if (state == 'Overstyrer') return 'yellow';       
+      return 'red';    
+  hide_attributes:
+    - templates
+    - icon
+    - icon_color
+    
+input_select.vtr300_fan_extract_man_override:
+  friendly_name: Avtrekksvifte man. overstyring
+  templates:  
+    icon: >
+      if (state == 'Auto') return 'mdi:fan-auto';
+      return 'mdi:fan-alert';    
+    icon_color: >
+      if (state == 'Auto') return 'grey'; 
+      if (state == 'Overstyrer') return 'yellow';       
+      return 'red';          
+  hide_attributes:
+    - templates
+    - icon
+    - icon_color
+    
+sensor.vtr300_a_alm:
+  templates: 
+    icon: >
+      return 'mdi:alpha-a-circle-outline';  
+    icon_color: >
+      if (state == 0) return 'grey';             
+      return 'red'; 
+  hide_attributes:
+    - templates
+    - icon
+    - icon_color
+    
+sensor.vtr300_b_alm:
+  templates: 
+    icon: >
+      return 'mdi:alpha-b-circle-outline';
+    icon_color: >
+      if (state == 0) return 'grey';             
+      return 'red'; 
+  hide_attributes:
+    - templates
+    - icon
+    - icon_color
+    
+sensor.vtr300_c_alm:
+  templates: 
+    icon: >
+      return 'mdi:alpha-c-circle-outline';
+    icon_color: >
+      if (state == 0) return 'grey';             
+      return 'red';       
+  hide_attributes:
+    - templates
+    - icon
+    - icon_color      

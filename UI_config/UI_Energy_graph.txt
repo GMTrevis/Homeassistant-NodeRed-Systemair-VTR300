@@ -1,0 +1,18 @@
+type: custom:mini-graph-card
+entities:
+  - entity: sensor.vtr300_faktisk_tilfort_kwh_daily
+    color: green
+    name: Faktisk tilført (tilført - forbr.)
+  - entity: sensor.vtr300_tilfort_kwh_daily
+    color: lightgreen
+    name: Tilført
+  - entity: sensor.vtr300_kwh_cnt_daily
+    color: red
+    name: Forbruk
+icon: mdi:transmission-tower
+name: Energi <- 7d
+hours_to_show: 168
+aggregate_func: max
+group_by: date
+show:
+  graph: bar

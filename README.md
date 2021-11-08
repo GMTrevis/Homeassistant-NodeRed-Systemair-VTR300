@@ -53,6 +53,7 @@ Not really a climate controlled in HA or Node Red as the supply temperature cont
 - **Type:** Only displays if the ventilation unit is in summer or winter mode (not selectable).
 
 ## Pop-up’s:
+![VTR300_pop_ups](https://github.com/GMTrevis/Homeassistant-NodeRed-Systemair-VTR300/blob/main/Views/VTR300_pop_ups.png)
 ### Frikjøling (Freecooling):
 Configurable according to the setpoints given in it’s pop’up, speed settings are Normal, High and Max.
 - ![VTR300_free_night_cooling_popup](https://github.com/GMTrevis/Homeassistant-NodeRed-Systemair-VTR300/blob/main/Views/VTR300_free_night_cooling_popup.png)
@@ -80,7 +81,7 @@ This feature is controlled in Node Red and automatically sets (calculate) the te
 
 ### Luftkvalitet (Air quality) 
 This is where the setpoints is given for PPM Auto mode and economic feature, the PPM Auto mode is controlled in Node Red which sets the speed of the ventilation unit based on moisture (priority 1 (Normal and High speed)), ppm (priority 2(Low, Normal, High and Boost speed)) and presence detection (Lo speed) if highest ppm value is <  PPM Normal Limit as criteria.
-- **What?: **Some might wonder why Boost aren’t the highest speed if the actual %RH(RF) > %RH(RF) hight setpoint (Fukt Høy grense). In my house the %RH is quickly ventilated after 1, 2 and 3 showers. I didn’t see the reason to enable max speed due to the already efficient ventilation of %RH in Normal and High speed.
+- **What?:** Some might wonder why Boost aren’t the highest speed if the actual %RH(RF) > %RH(RF) hight setpoint (Fukt Høy grense). In my house the %RH is quickly ventilated after 1, 2 and 3 showers. I didn’t see the reason to enable max speed due to the already efficient ventilation of %RH in Normal and High speed.
 - ![VTR300_air_quality_popup](https://github.com/GMTrevis/Homeassistant-NodeRed-Systemair-VTR300/blob/main/Views/VTR300_air_quality_popup.png)
 - **Forespurt hastighet (requested speed):** This only displays the requested speed in PPM Auto mode.
 - **El.kolbe nåverdi (El.heater actual value):** This only displays the 0-100% command to the el.heater.
@@ -160,7 +161,7 @@ I’m using the custom component “nordpool” provided by @Hellolol and add th
 
 ## Notifications: 
 ### Persistant notifications:
-- “Modbus Data sist lest” +” last timestamp” (reads the internal clock register as an attempt to try to notify if modbus communication is down is down, this will be as an alternative to check info in the “system” pop-up).
+- Modbus Data sist lest + last timestamp (reads the internal clock register as an attempt to try to notify if modbus communication is down is down, this will be as an alternative to check info in the “system” pop-up).
 - Moist override Hi and Manual override enabled.
 - ppm sensor failure.
 - Outdoor temp. sensor failure.
@@ -181,7 +182,7 @@ I’m using the custom component “nordpool” provided by @Hellolol and add th
 - C-Alarm
 
 ## Node Red “map”:
-A “map” of the modbus flow in Node Red where modbus read/write is handled, numbered to give an idea where you need to modify the flow in Node Red. I might miss some points below, but it will give you a rough idea.
+A “map” of the flow in Node Red where modbus read/write is handled, numbered to give an idea where you need to modify the flow in Node Red. I might miss some points below, but it will give you a rough idea.
 - ![VTR300_node_red_map](https://github.com/GMTrevis/Homeassistant-NodeRed-Systemair-VTR300/blob/main/Views/VTR300_node_red_map.png)
 
 ### Outdoor temperature compensation:
@@ -229,6 +230,7 @@ This is not as smooth as I would like it to be as it is a manual installation, b
 - input_number_vtr300
 - input_select_vtr300
 - scripts_vtr300
+- scripts_poup_ vtr300
 - sensors_time_date_misc (only a few of them are being used).
 - switches_vtr300
 - customize_vtr300 (If you want icon state changes, the ppm entities must be adapted to your setup)

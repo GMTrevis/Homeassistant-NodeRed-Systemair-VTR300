@@ -1,0 +1,627 @@
+type: vertical-stack
+cards:
+  - type: horizontal-stack
+    cards:
+      - type: custom:button-card
+        color: rgb(64, 152, 55)
+        color_type: card
+        entity: switch.vtr300_auto_modus
+        name: Auto
+        icon: mdi:clock-outline
+        aspect_ratio: 1.1
+        haptic: success
+        hold_action:
+          action: more-info
+        show_last_changed: false
+        show_state: false
+        styles:
+          card:
+            - filter: opacity(100%)
+            - '--mdc-ripple-color': yellow
+            - '--mdc-ripple-press-opacity': 0.5
+            - font-size: 16px
+        state:
+          - styles:
+              card:
+                - filter: opacity(50%)
+                - background: ''
+                - '--mdc-ripple-color': yellow
+                - '--mdc-ripple-press-opacity': 0.5
+                - font-size: 25px
+              icon:
+                - filter: grayscale(100%)
+              label:
+                - font-size: 11px
+            value: 'off'
+          - styles:
+              card:
+                - '--mdc-ripple-color': yellow
+                - '--mdc-ripple-press-opacity': 0.5
+                - font-size: 25px
+              icon:
+                - filter: grayscale(100%)
+              label:
+                - font-size: 11px
+            value: 'on'
+        confirmation:
+          text: >-
+            [[[ return `Vil du virkelig velge
+            ${entity.attributes.friendly_name}?` ]]]
+        show_label: true
+        size: 80%
+      - type: custom:button-card
+        color: rgb(64, 152, 55)
+        color_type: card
+        entity: switch.vtr300_ppm_mode_auto_enable
+        name: PPM Auto
+        icon: mdi:auto-fix
+        aspect_ratio: 1.1
+        haptic: success
+        hold_action:
+          action: more-info
+        show_last_changed: false
+        show_state: false
+        styles:
+          card:
+            - filter: opacity(100%)
+            - '--mdc-ripple-color': yellow
+            - '--mdc-ripple-press-opacity': 0.5
+            - font-size: 16px
+        state:
+          - styles:
+              card:
+                - filter: opacity(50%)
+                - background: ''
+                - '--mdc-ripple-color': yellow
+                - '--mdc-ripple-press-opacity': 0.5
+                - font-size: 20px
+              icon:
+                - filter: grayscale(100%)
+              label:
+                - font-size: 11px
+            value: 'off'
+          - styles:
+              card:
+                - '--mdc-ripple-color': yellow
+                - '--mdc-ripple-press-opacity': 0.5
+                - font-size: 20px
+              icon:
+                - filter: grayscale(100%)
+              label:
+                - font-size: 11px
+            value: 'on'
+        label: |
+          [[[
+            return states['sensor.vtr300_ppm_modus_status'].state;
+          ]]]
+        confirmation:
+          text: >-
+            [[[ return `Vil du virkelig velge
+            ${entity.attributes.friendly_name}?` ]]]
+        show_label: true
+        size: 80%
+      - type: custom:button-card
+        entity: switch.vtr300_borte_modus
+        name: Borte
+        icon: mdi:home-export-outline
+        aspect_ratio: 1.1
+        show_state: false
+        styles:
+          card:
+            - '--mdc-ripple-color': yellow
+            - '--mdc-ripple-press-opacity': 0.5
+            - font-size: 16px
+          grid:
+            - grid-template-areas: '"i" "n" "l"'
+            - grid-template-columns: 1fr
+            - grid-template-rows: 1fr min-content min-content
+          img_cell:
+            - align-self: start
+            - text-align: start
+          name:
+            - justify-self: start
+            - padding-left: 10px
+            - font-weight: bold
+          state:
+            - justify-self: start
+            - padding-left: 10px
+          label:
+            - font-size: 12px
+        state:
+          - value: 'off'
+            styles:
+              card:
+                - filter: opacity(50%)
+              icon:
+                - filter: grayscale(100%)
+        confirmation:
+          text: >-
+            [[[ return `Vil du virkelig velge
+            ${entity.attributes.friendly_name}?` ]]]
+        label: |
+          [[[
+            return states['sensor.vtr300_borte_nedtelling_tid_t'].state;
+          ]]]
+        show_label: true
+        size: 80%
+      - type: custom:button-card
+        entity: switch.vtr300_ferie_modus
+        name: Ferie
+        icon: mdi:briefcase
+        aspect_ratio: 1.1
+        show_state: false
+        styles:
+          card:
+            - '--mdc-ripple-color': yellow
+            - '--mdc-ripple-press-opacity': 0.5
+            - font-size: 16px
+          grid:
+            - grid-template-areas: '"i" "n" "l"'
+            - grid-template-columns: 1fr
+            - grid-template-rows: 1fr min-content min-content
+          img_cell:
+            - align-self: start
+            - text-align: start
+          name:
+            - justify-self: start
+            - padding-left: 10px
+            - font-weight: bold
+          state:
+            - justify-self: start
+            - padding-left: 10px
+          label:
+            - font-size: 12px
+        state:
+          - value: 'off'
+            styles:
+              card:
+                - filter: opacity(50%)
+              icon:
+                - filter: grayscale(100%)
+        confirmation:
+          text: >-
+            [[[ return `Vil du virkelig velge
+            ${entity.attributes.friendly_name}?` ]]]
+        label: |
+          [[[
+            return states['sensor.vtr300_ferie_nedtelling_tid_d'].state;
+          ]]]
+        show_label: true
+        size: 80%
+  - type: horizontal-stack
+    cards:
+      - type: custom:button-card
+        entity: switch.vtr300_man_lav_modus
+        name: Lav
+        icon: mdi:fan-speed-1
+        show_state: false
+        styles:
+          card:
+            - width: 112px
+            - height: 90px
+            - '--mdc-ripple-color': yellow
+            - '--mdc-ripple-press-opacity': 0.5
+            - font-size: 16px
+          grid:
+            - grid-template-areas: '"i" "n" "l"'
+            - grid-template-columns: 1fr
+            - grid-template-rows: 1fr min-content min-content
+          img_cell:
+            - align-self: start
+            - text-align: start
+          name:
+            - justify-self: middle
+            - padding-left: 0px
+            - font-weight: bold
+          state:
+            - justify-self: start
+            - padding-left: 10px
+          label:
+            - font-size: 11px
+        state:
+          - value: 'off'
+            styles:
+              card:
+                - filter: opacity(50%)
+              icon:
+                - filter: grayscale(100%)
+        label: |
+          [[[
+            return states['sensor.vtr300_manuell_button_modus_status'].state;
+          ]]]
+        confirmation:
+          text: >-
+            [[[ return `Vil du virkelig velge
+            ${entity.attributes.friendly_name}?` ]]]
+        show_label: true
+        size: 80%
+      - type: custom:button-card
+        entity: switch.vtr300_man_normal_modus
+        name: Normal
+        icon: mdi:fan-speed-2
+        show_state: false
+        styles:
+          card:
+            - width: 112px
+            - height: 90px
+            - '--mdc-ripple-color': yellow
+            - '--mdc-ripple-press-opacity': 0.5
+            - font-size: 16px
+          grid:
+            - grid-template-areas: '"i" "n" "l"'
+            - grid-template-columns: 1fr
+            - grid-template-rows: 1fr min-content min-content
+          img_cell:
+            - align-self: start
+            - text-align: start
+          name:
+            - justify-self: middle
+            - padding-left: 0px
+            - font-weight: bold
+          state:
+            - justify-self: start
+            - padding-left: 10px
+          label:
+            - font-size: 11px
+        state:
+          - value: 'off'
+            styles:
+              card:
+                - filter: opacity(50%)
+              icon:
+                - filter: grayscale(100%)
+        label: |
+          [[[
+            return states['sensor.vtr300_manuell_button_modus_status'].state;
+          ]]]
+        confirmation:
+          text: >-
+            [[[ return `Vil du virkelig velge
+            ${entity.attributes.friendly_name}?` ]]]
+        show_label: true
+        size: 80%
+      - type: custom:button-card
+        entity: switch.vtr300_man_hoy_modus
+        name: Høy
+        icon: mdi:fan-speed-3
+        show_state: false
+        styles:
+          card:
+            - width: 112px
+            - height: 90px
+            - '--mdc-ripple-color': yellow
+            - '--mdc-ripple-press-opacity': 0.5
+            - font-size: 16px
+          grid:
+            - grid-template-areas: '"i" "n" "l"'
+            - grid-template-columns: 1fr
+            - grid-template-rows: 1fr min-content min-content
+          img_cell:
+            - align-self: start
+            - text-align: start
+          name:
+            - justify-self: middle
+            - padding-left: 0px
+            - font-weight: bold
+          state:
+            - justify-self: start
+            - padding-left: 10px
+          label:
+            - font-size: 11px
+        state:
+          - value: 'off'
+            styles:
+              card:
+                - filter: opacity(50%)
+              icon:
+                - filter: grayscale(100%)
+        label: |
+          [[[
+            return states['sensor.vtr300_manuell_button_modus_status'].state;
+          ]]]
+        confirmation:
+          text: >-
+            [[[ return `Vil du virkelig velge
+            ${entity.attributes.friendly_name}?` ]]]
+        show_label: true
+        size: 80%
+  - type: horizontal-stack
+    cards:
+      - type: custom:button-card
+        entity: switch.vtr300_party_modus
+        name: Party
+        icon: mdi:party-popper
+        show_state: false
+        styles:
+          card:
+            - width: 112px
+            - height: 90px
+            - '--mdc-ripple-color': yellow
+            - '--mdc-ripple-press-opacity': 0.5
+            - font-size: 16px
+          grid:
+            - grid-template-areas: '"i" "n" "l"'
+            - grid-template-columns: 1fr
+            - grid-template-rows: 1fr min-content min-content
+          img_cell:
+            - align-self: start
+            - text-align: start
+          name:
+            - justify-self: start
+            - padding-left: 10px
+            - font-weight: bold
+          state:
+            - justify-self: start
+            - padding-left: 10px
+          label:
+            - font-size: 12px
+        state:
+          - value: 'off'
+            styles:
+              card:
+                - filter: opacity(50%)
+              icon:
+                - filter: grayscale(100%)
+        label: |
+          [[[
+            return states['sensor.vtr300_party_nedtelling_tid_t'].state;
+          ]]]
+        confirmation:
+          text: >-
+            [[[ return `Vil du virkelig velge
+            ${entity.attributes.friendly_name}?` ]]]
+        show_label: true
+        size: 80%
+      - type: custom:button-card
+        entity: switch.vtr300_boost_modus
+        name: Boost
+        icon: mdi:weather-windy
+        show_state: false
+        styles:
+          card:
+            - width: 112px
+            - height: 90px
+            - '--mdc-ripple-color': yellow
+            - '--mdc-ripple-press-opacity': 0.5
+            - font-size: 16px
+          grid:
+            - grid-template-areas: '"i" "n" "l"'
+            - grid-template-columns: 1fr
+            - grid-template-rows: 1fr min-content min-content
+          img_cell:
+            - align-self: start
+            - text-align: start
+          name:
+            - justify-self: start
+            - padding-left: 10px
+            - font-weight: bold
+          state:
+            - justify-self: start
+            - padding-left: 10px
+          label:
+            - font-size: 12px
+        state:
+          - value: 'off'
+            styles:
+              card:
+                - filter: opacity(50%)
+              icon:
+                - filter: grayscale(100%)
+        label: |
+          [[[
+            return states['sensor.vtr300_boost_nedtelling_tid_min'].state;
+          ]]]
+        confirmation:
+          text: >-
+            [[[ return `Vil du virkelig velge
+            ${entity.attributes.friendly_name}?` ]]]
+        show_label: true
+        size: 80%
+      - type: custom:button-card
+        entity: switch.vtr300_ildsted_modus
+        name: Ildsted
+        icon: mdi:fire
+        show_state: false
+        styles:
+          card:
+            - width: 112px
+            - height: 90px
+            - '--mdc-ripple-color': yellow
+            - '--mdc-ripple-press-opacity': 0.5
+            - font-size: 16px
+          grid:
+            - grid-template-areas: '"i" "n" "l"'
+            - grid-template-columns: 1fr
+            - grid-template-rows: 1fr min-content min-content
+          img_cell:
+            - align-self: start
+            - text-align: start
+          name:
+            - justify-self: start
+            - padding-left: 10px
+            - font-weight: bold
+          state:
+            - justify-self: start
+            - padding-left: 10px
+          label:
+            - font-size: 12px
+        state:
+          - value: 'off'
+            styles:
+              card:
+                - filter: opacity(50%)
+              icon:
+                - filter: grayscale(100%)
+        label: |
+          [[[
+            return states['sensor.vtr300_ildsted_nedtelling_tid_min'].state;
+          ]]]
+        confirmation:
+          text: >-
+            [[[ return `Vil du virkelig velge
+            ${entity.attributes.friendly_name}?` ]]]
+        show_label: true
+        size: 80%
+  - type: horizontal-stack
+    cards:
+      - type: custom:button-card
+        entity: switch.vtr300_man_stopp_modus
+        name: STOPP
+        icon: mdi:fan-off
+        show_state: false
+        styles:
+          card:
+            - filter: opacity(60%)
+            - background: ''
+            - width: 115px
+            - height: 90px
+            - '--mdc-ripple-color': yellow
+            - '--mdc-ripple-press-opacity': 0.5
+            - font-size: 16px
+          grid:
+            - grid-template-areas: '"i" "n" "s"'
+            - grid-template-columns: 1fr
+            - grid-template-rows: 1fr min-content min-content
+          img_cell:
+            - align-self: start
+            - text-align: start
+          name:
+            - justify-self: start
+            - padding-left: 10px
+            - font-weight: bold
+          state:
+            - justify-self: middle
+            - padding-left: 0px
+            - font-size: 11px
+          label:
+            - font-size: 11px
+        state:
+          - value: 'off'
+            styles:
+              card:
+                - filter: opacity(60%)
+              icon:
+                - filter: grayscale(100%)
+        confirmation:
+          text: >-
+            [[[ return `Vil du virkelig velge
+            ${entity.attributes.friendly_name}?` ]]]
+        show_label: true
+        size: 80%
+  - type: horizontal-stack
+    cards:
+      - type: custom:button-card
+        color_type: card
+        entity: sensor.vtr300_a_alm
+        name: A-Alarm
+        styles:
+          card:
+            - filter: opacity(30%)
+            - width: 65px
+            - height: 50px
+            - font-size: 12px
+        state:
+          - value: 'off'
+          - operator: template
+            value: |
+              [[[ return states['sensor.vtr300_a_alm'].state == 1 ]]]
+            color: red
+            icon: mdi:alert
+            styles:
+              card:
+                - animation: blink 2s ease infinite
+          - operator: default
+            color: none
+            icon: mdi:shield-check
+      - type: custom:button-card
+        color_type: card
+        entity: sensor.vtr300_b_alm
+        name: B-Alarm
+        styles:
+          card:
+            - filter: opacity(30%)
+            - width: 65px
+            - height: 50px
+            - font-size: 12px
+        state:
+          - value: 'off'
+          - operator: template
+            value: |
+              [[[ return states['sensor.vtr300_b_alm'].state == 1 ]]]
+            color: red
+            icon: mdi:alert
+            styles:
+              card:
+                - animation: blink 2s ease infinite
+          - operator: default
+            color: none
+            icon: mdi:shield-check
+      - type: custom:button-card
+        color_type: card
+        entity: sensor.vtr300_c_alm
+        name: C-Alarm
+        styles:
+          card:
+            - filter: opacity(30%)
+            - width: 65px
+            - height: 50px
+            - font-size: 12px
+        state:
+          - value: 'off'
+          - operator: template
+            value: |
+              [[[ return states['sensor.vtr300_c_alm'].state == 1 ]]]
+            color: red
+            icon: mdi:alert
+            styles:
+              card:
+                - animation: blink 2s ease infinite
+          - operator: default
+            color: none
+            icon: mdi:shield-check
+      - type: custom:button-card
+        color_type: card
+        entity: sensor.vtr300_filter_alm
+        name: Filter
+        styles:
+          card:
+            - filter: opacity(30%)
+            - width: 65px
+            - height: 50px
+            - font-size: 12px
+        state:
+          - value: 'off'
+          - operator: template
+            value: |
+              [[[ return states['sensor.vtr300_filter_alm'].state == 1 ]]]
+            color: red
+            icon: mdi:alert
+            styles:
+              card:
+                - animation: blink 2s ease infinite
+          - operator: default
+            color: none
+            icon: mdi:shield-check
+      - type: custom:button-card
+        color_type: card
+        entity: sensor.vtr300_filter_wrn_alm
+        name: Filt.wrn
+        styles:
+          card:
+            - filter: opacity(30%)
+            - width: 65px
+            - height: 50px
+            - font-size: 12px
+        state:
+          - value: 'off'
+          - operator: template
+            value: |
+              [[[ return states['sensor.vtr300_filter_wrn_alm'].state == 1 ]]]
+            color: red
+            icon: mdi:alert
+            styles:
+              card:
+                - animation: blink 2s ease infinite
+          - operator: default
+            color: none
+            icon: mdi:shield-check

@@ -1,0 +1,600 @@
+type: vertical-stack
+cards:
+  - type: horizontal-stack
+    cards:
+      - type: custom:button-card
+        entity: switch.vtr300_freecooling
+        name: Frikjøling
+        icon: ''
+        show_state: false
+        styles:
+          card:
+            - width: 80px
+            - height: 70px
+            - '--mdc-ripple-color': yellow
+            - '--mdc-ripple-press-opacity': 0.5
+            - font-size: 14px
+          grid:
+            - grid-template-areas: '"i" "n" "l"'
+            - grid-template-columns: 1fr
+            - grid-template-rows: 1fr min-content min-content
+          img_cell:
+            - align-self: start
+            - text-align: start
+          name:
+            - justify-self: middle
+            - padding-left: 0px
+            - font-weight: ''
+          state:
+            - justify-self: start
+            - padding-left: 10px
+          label:
+            - font-size: 12px
+            - font-weight: bold
+        state:
+          - value: 'off'
+            styles:
+              card:
+                - filter: opacity(50%)
+              icon:
+                - filter: grayscale(100%)
+        label: |
+          [[[
+            return states['sensor.vtr300_freecooling_state'].state;
+          ]]]
+        confirmation:
+          text: >-
+            [[[ return `Vil du virkelig velge
+            ${entity.attributes.friendly_name}?` ]]]
+        show_label: true
+        size: 80%
+      - type: custom:button-card
+        entity: switch.vtr300_cooling_recovery
+        name: Kjølegjenv.
+        icon: ''
+        show_state: false
+        styles:
+          card:
+            - width: 80px
+            - height: 70px
+            - '--mdc-ripple-color': yellow
+            - '--mdc-ripple-press-opacity': 0.5
+            - font-size: 14px
+          grid:
+            - grid-template-areas: '"i" "n" "l"'
+            - grid-template-columns: 1fr
+            - grid-template-rows: 1fr min-content min-content
+          img_cell:
+            - align-self: start
+            - text-align: start
+          name:
+            - justify-self: middle
+            - padding-left: 0px
+            - font-weight: ''
+          state:
+            - justify-self: start
+            - padding-left: 10px
+          label:
+            - font-size: 12px
+            - font-weight: bold
+        state:
+          - value: 'off'
+            styles:
+              card:
+                - filter: opacity(50%)
+              icon:
+                - filter: grayscale(100%)
+        label: |
+          [[[
+            return states['sensor.vtr300_cooling_recovery_states'].state;
+          ]]]
+        confirmation:
+          text: >-
+            [[[ return `Vil du virkelig velge
+            ${entity.attributes.friendly_name}?` ]]]
+        show_label: true
+        size: 80%
+      - type: custom:button-card
+        entity: switch.vtr300_eco_mode
+        name: Eco.
+        icon: ''
+        show_state: false
+        styles:
+          card:
+            - width: 80px
+            - height: 70px
+            - '--mdc-ripple-color': yellow
+            - '--mdc-ripple-press-opacity': 0.5
+            - font-size: 14px
+          grid:
+            - grid-template-areas: '"i" "n" "l"'
+            - grid-template-columns: 1fr
+            - grid-template-rows: 1fr min-content min-content
+          img_cell:
+            - align-self: start
+            - text-align: start
+          name:
+            - justify-self: middle
+            - padding-left: 0px
+            - font-weight: ''
+          state:
+            - justify-self: start
+            - padding-left: 10px
+          label:
+            - font-size: 12px
+            - font-weight: ''
+        state:
+          - value: 'off'
+            styles:
+              card:
+                - filter: opacity(50%)
+              icon:
+                - filter: grayscale(100%)
+        label: |
+          [[[
+            return states ['input_number.vtr300_eco_offset_temp_sp'].state +'°C';
+          ]]]
+        confirmation:
+          text: >-
+            [[[ return `Vil du virkelig velge
+            ${entity.attributes.friendly_name}?` ]]]
+        show_label: true
+        size: 80%
+      - type: custom:button-card
+        entity: input_boolean.vtr300_utekomp_tilluft_reg
+        name: Utekomp.
+        icon: ''
+        show_state: false
+        styles:
+          card:
+            - width: 80px
+            - height: 70px
+            - '--mdc-ripple-color': yellow
+            - '--mdc-ripple-press-opacity': 0.5
+            - font-size: 14px
+          grid:
+            - grid-template-areas: '"i" "n" "l"'
+            - grid-template-columns: 1fr
+            - grid-template-rows: 1fr min-content min-content
+          img_cell:
+            - align-self: start
+            - text-align: start
+          name:
+            - justify-self: middle
+            - padding-left: 0px
+            - font-weight: ''
+          state:
+            - justify-self: start
+            - padding-left: 10px
+          label:
+            - font-size: 12px
+        state:
+          - value: 'off'
+            styles:
+              card:
+                - filter: opacity(50%)
+              icon:
+                - filter: grayscale(100%)
+        label: |
+          [[[
+            return states['sensor.vtr300_utekomp_temp_calc'].state +'°C';;
+          ]]]
+        confirmation:
+          text: >-
+            [[[ return `Vil du virkelig velge
+            ${entity.attributes.friendly_name}?` ]]]
+        show_label: true
+        size: 80%
+  - type: horizontal-stack
+    cards:
+      - type: custom:button-card
+        color: grey
+        name: Frikjøling
+        icon: mdi:tools
+        aspect_ratio: 1.5
+        show_state: false
+        tap_action:
+          action: fire-dom-event
+          browser_mod:
+            command: call-service
+            service: script.vtr300_frecooling_popup
+            service_data:
+              deviceID:
+                - this
+        styles:
+          card:
+            - font-size: 12px
+            - filter: opacity(80%)
+            - '--mdc-ripple-color': yellow
+            - '--mdc-ripple-press-opacity': 0.5
+          grid:
+            - grid-template-areas: '"i" "n" "s"'
+            - grid-template-columns: 1fr
+            - grid-template-rows: 1fr min-content min-content
+          img_cell:
+            - align-self: start
+            - text-align: start
+          name:
+            - justify-self: middle
+            - padding-left: 0px
+            - font-weight: ''
+          state:
+            - justify-self: start
+            - padding-left: 10px
+          label:
+            - font-size: 11px
+        state:
+          - value: 'off'
+            styles:
+              card:
+                - filter: opacity(50%)
+              icon:
+                - filter: grayscale(100%)
+        show_label: false
+        size: 80%
+      - type: custom:button-card
+        color: grey
+        name: Kjølegjenv.
+        icon: mdi:tools
+        aspect_ratio: 1.5
+        show_state: false
+        tap_action:
+          action: fire-dom-event
+          browser_mod:
+            command: call-service
+            service: script.vtr300_cooling_recovery_popup
+            service_data:
+              deviceID:
+                - this
+        styles:
+          card:
+            - font-size: 12px
+            - filter: opacity(80%)
+            - '--mdc-ripple-color': yellow
+            - '--mdc-ripple-press-opacity': 0.5
+          grid:
+            - grid-template-areas: '"i" "n" "s"'
+            - grid-template-columns: 1fr
+            - grid-template-rows: 1fr min-content min-content
+          img_cell:
+            - align-self: start
+            - text-align: start
+          name:
+            - justify-self: middle
+            - padding-left: 0px
+            - font-weight: ''
+          state:
+            - justify-self: start
+            - padding-left: 10px
+          label:
+            - font-size: 11px
+        state:
+          - value: 'off'
+            styles:
+              card:
+                - filter: opacity(50%)
+              icon:
+                - filter: grayscale(100%)
+        show_label: false
+        size: 80%
+      - type: custom:button-card
+        color: grey
+        name: Overstyr.
+        icon: mdi:tools
+        aspect_ratio: 1.5
+        show_state: false
+        tap_action:
+          action: fire-dom-event
+          browser_mod:
+            command: call-service
+            service: script.vtr300_man_override_spd_popup
+            service_data:
+              deviceID:
+                - this
+        styles:
+          card:
+            - font-size: 12px
+            - filter: opacity(80%)
+            - '--mdc-ripple-color': yellow
+            - '--mdc-ripple-press-opacity': 0.5
+          grid:
+            - grid-template-areas: '"i" "n" "s"'
+            - grid-template-columns: 1fr
+            - grid-template-rows: 1fr min-content min-content
+          img_cell:
+            - align-self: start
+            - text-align: start
+          name:
+            - justify-self: middle
+            - padding-left: 0px
+            - font-weight: ''
+          state:
+            - justify-self: start
+            - padding-left: 10px
+          label:
+            - font-size: 11px
+        state:
+          - value: 'off'
+            styles:
+              card:
+                - filter: opacity(50%)
+              icon:
+                - filter: grayscale(100%)
+        show_label: false
+        size: 80%
+      - type: custom:button-card
+        color: grey
+        name: Viftekomp.
+        icon: mdi:tools
+        aspect_ratio: 1.5
+        show_state: false
+        tap_action:
+          action: fire-dom-event
+          browser_mod:
+            command: call-service
+            service: script.vtr300_utekomp_vifte_hast_popup
+            service_data:
+              deviceID:
+                - this
+        styles:
+          card:
+            - font-size: 12px
+            - filter: opacity(80%)
+            - '--mdc-ripple-color': yellow
+            - '--mdc-ripple-press-opacity': 0.5
+          grid:
+            - grid-template-areas: '"i" "n" "s"'
+            - grid-template-columns: 1fr
+            - grid-template-rows: 1fr min-content min-content
+          img_cell:
+            - align-self: start
+            - text-align: start
+          name:
+            - justify-self: middle
+            - padding-left: 0px
+            - font-weight: ''
+          state:
+            - justify-self: start
+            - padding-left: 10px
+          label:
+            - font-size: 11px
+        state:
+          - value: 'off'
+            styles:
+              card:
+                - filter: opacity(50%)
+              icon:
+                - filter: grayscale(100%)
+        show_label: false
+        size: 80%
+      - type: custom:button-card
+        color: grey
+        name: Utekomp.
+        icon: mdi:tools
+        aspect_ratio: 1.5
+        show_state: false
+        tap_action:
+          action: fire-dom-event
+          browser_mod:
+            command: call-service
+            service: script.vtr300_utekomp_temp_popup
+            service_data:
+              deviceID:
+                - this
+        styles:
+          card:
+            - font-size: 12px
+            - filter: opacity(80%)
+            - '--mdc-ripple-color': yellow
+            - '--mdc-ripple-press-opacity': 0.5
+          grid:
+            - grid-template-areas: '"i" "n" "s"'
+            - grid-template-columns: 1fr
+            - grid-template-rows: 1fr min-content min-content
+          img_cell:
+            - align-self: start
+            - text-align: start
+          name:
+            - justify-self: middle
+            - padding-left: 0px
+            - font-weight: ''
+          state:
+            - justify-self: start
+            - padding-left: 10px
+          label:
+            - font-size: 11px
+        state:
+          - value: 'off'
+            styles:
+              card:
+                - filter: opacity(50%)
+              icon:
+                - filter: grayscale(100%)
+        show_label: false
+        size: 80%
+  - type: horizontal-stack
+    cards:
+      - type: custom:button-card
+        color: grey
+        name: Luftkvalitet
+        icon: mdi:weather-windy
+        show_state: false
+        tap_action:
+          action: fire-dom-event
+          browser_mod:
+            command: call-service
+            service: script.vtr300_air_quality_popup
+            service_data:
+              deviceID:
+                - this
+        styles:
+          card:
+            - width: 70px
+            - height: 55px
+            - font-size: 12px
+            - filter: opacity(80%)
+            - '--mdc-ripple-color': yellow
+            - '--mdc-ripple-press-opacity': 0.5
+          grid:
+            - grid-template-areas: '"i" "n" "s"'
+            - grid-template-columns: 1fr
+            - grid-template-rows: 1fr min-content min-content
+          img_cell:
+            - align-self: start
+            - text-align: start
+          name:
+            - justify-self: middle
+            - padding-left: 0px
+            - font-weight: ''
+          state:
+            - justify-self: start
+            - padding-left: 10px
+          label:
+            - font-size: 11px
+        state:
+          - value: 'off'
+            styles:
+              card:
+                - filter: opacity(50%)
+              icon:
+                - filter: grayscale(100%)
+        show_label: false
+        size: 80%
+      - type: custom:button-card
+        color: grey
+        name: Auto Sch.
+        icon: mdi:timetable
+        show_state: false
+        tap_action:
+          action: fire-dom-event
+          browser_mod:
+            command: call-service
+            service: script.vtr300_auto_sch_popup
+            service_data:
+              deviceID:
+                - this
+        styles:
+          card:
+            - width: 70px
+            - height: 55px
+            - font-size: 12px
+            - filter: opacity(80%)
+            - '--mdc-ripple-color': yellow
+            - '--mdc-ripple-press-opacity': 0.5
+          grid:
+            - grid-template-areas: '"i" "n" "s"'
+            - grid-template-columns: 1fr
+            - grid-template-rows: 1fr min-content min-content
+          img_cell:
+            - align-self: start
+            - text-align: start
+          name:
+            - justify-self: middle
+            - padding-left: 0px
+            - font-weight: ''
+          state:
+            - justify-self: start
+            - padding-left: 10px
+          label:
+            - font-size: 11px
+        state:
+          - value: 'off'
+            styles:
+              card:
+                - filter: opacity(50%)
+              icon:
+                - filter: grayscale(100%)
+        show_label: false
+        size: 80%
+      - type: custom:button-card
+        color: grey
+        name: Varighet
+        icon: mdi:timer-sand
+        show_state: false
+        tap_action:
+          action: fire-dom-event
+          browser_mod:
+            command: call-service
+            service: script.vtr300_mode_timers_popup
+            service_data:
+              deviceID:
+                - this
+        styles:
+          card:
+            - width: 70px
+            - height: 55px
+            - font-size: 12px
+            - filter: opacity(80%)
+            - '--mdc-ripple-color': yellow
+            - '--mdc-ripple-press-opacity': 0.5
+          grid:
+            - grid-template-areas: '"i" "n" "s"'
+            - grid-template-columns: 1fr
+            - grid-template-rows: 1fr min-content min-content
+          img_cell:
+            - align-self: start
+            - text-align: start
+          name:
+            - justify-self: middle
+            - padding-left: 0px
+            - font-weight: ''
+          state:
+            - justify-self: start
+            - padding-left: 10px
+          label:
+            - font-size: 11px
+        state:
+          - value: 'off'
+            styles:
+              card:
+                - filter: opacity(50%)
+              icon:
+                - filter: grayscale(100%)
+        show_label: false
+        size: 80%
+      - type: custom:button-card
+        color: grey
+        name: System
+        icon: mdi:tools
+        show_state: false
+        tap_action:
+          action: fire-dom-event
+          browser_mod:
+            command: call-service
+            service: script.vtr300_system_popup
+            service_data:
+              deviceID:
+                - this
+        styles:
+          card:
+            - width: 70px
+            - height: 55px
+            - font-size: 12px
+            - filter: opacity(80%)
+            - '--mdc-ripple-color': yellow
+            - '--mdc-ripple-press-opacity': 0.5
+          grid:
+            - grid-template-areas: '"i" "n" "s"'
+            - grid-template-columns: 1fr
+            - grid-template-rows: 1fr min-content min-content
+          img_cell:
+            - align-self: start
+            - text-align: start
+          name:
+            - justify-self: middle
+            - padding-left: 0px
+            - font-weight: ''
+          state:
+            - justify-self: start
+            - padding-left: 10px
+          label:
+            - font-size: 11px
+        state:
+          - value: 'off'
+            styles:
+              card:
+                - filter: opacity(50%)
+              icon:
+                - filter: grayscale(100%)
+        show_label: false
+        size: 80%
