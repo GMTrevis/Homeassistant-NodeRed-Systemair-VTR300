@@ -1,0 +1,75 @@
+################################################################
+#------------------- HOMEASSISTANT ----------------------------|
+################################################################
+
+#------------------- DEFAULT ----------------------------------|
+#Configure a default setup of Home Assistant(frontend, api, etc)
+default_config:
+
+#------------------- THEMES -----------------------------------|
+frontend:
+  themes: !include_dir_merge_named themes
+
+#------------------- THEMES -----------------------------------|
+#------------------- THEMES -----------------------------------|
+homeassistant:
+
+#------------------- INCLUDE ----------------------------------|
+  customize: !include_dir_merge_named customize/
+  customize_glob: !include global/customize_global.yaml    
+  customize_domain: !include domain/customize_domain.yaml 
+
+#------------------- UTILITY METER ----------------------------|   
+utility_meter:
+  vtr300_kwh_cnt_daily:
+    source: sensor.tp_link_vtr300_total_kwh
+    cycle: daily       
+  vtr300_kwh_cnt_weekly:
+    source: sensor.tp_link_vtr300_total_kwh
+    cycle: weekly    
+  vtr300_kwh_cnt_monthly:
+    source: sensor.tp_link_vtr300_total_kwh
+    cycle: monthly  
+  vtr300_kwh_cnt_yearly:
+    source: sensor.tp_link_vtr300_total_kwh
+    cycle: yearly      
+
+
+#------------------- NORDPOOL --------------------------------| 
+nordpool:
+
+#------------------- CLIMATE ---------------------------------| 
+climate:
+  - platform: generic_thermostat
+    name: vtr300_tilluft_sp
+    heater: switch.vtr300_climate_dummyswitch
+    target_sensor: sensor.vtr300_tillufts_temperatur
+    min_temp: 15
+    max_temp: 30
+    ac_mode: false
+    target_temp: 22
+    cold_tolerance: 0.5
+    hot_tolerance: 0.5
+    min_cycle_duration:
+      seconds: 60
+    keep_alive:
+      minutes: 30
+    initial_hvac_mode: "off"
+    away_temp: 22
+    precision: 1 
+  
+#------------------- INCLUDE----------------------------------|
+scene: !include scenes.yaml
+group: !include groups.yaml
+automation: !include_dir_merge_list automations/
+script: !include_dir_merge_named scripts/
+input_select: !include_dir_merge_named input_select/
+input_datetime: !include_dir_merge_named input_datetime/
+input_number: !include_dir_merge_named input_number/
+input_boolean: !include_dir_merge_named input_boolean/
+switch: !include_dir_merge_list switches/
+sensor: !include_dir_merge_list sensors/
+binary_sensor: !include_dir_merge_list binary_sensors/
+
+
+
