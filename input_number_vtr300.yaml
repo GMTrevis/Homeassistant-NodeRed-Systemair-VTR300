@@ -1,0 +1,392 @@
+#*************************************************************************************************************************************************************
+#--------------------------------------------------------------------- INPUT NUMBER - VTR300 ----------------------------------------------------------------*
+#*************************************************************************************************************************************************************
+
+#---------------------------------------------------------- VTR300 - Modbus R/W via Node-Red ----------------------------------------------------------------|
+
+#---------------------------------- VTR300 Tilluft - Climate
+vtr300_tilluft_sp:
+  name: Ønsket tilluftstemperatur
+  min: 12
+  max: 30
+  step: 0.5
+  mode: slider
+  unit_of_measurement: °C
+  icon: mdi:thermometer-lines
+#---------------------------------- VTR300 Schedule - Temperature offset during active week (Auto mode) 
+vtr300_sch_active_temp_offset_sp:
+  name: Sch. Temp offset active week
+  min: -10
+  max: 0
+  step: 0.5
+  mode: slider
+  unit_of_measurement: °C
+  icon: mdi:thermometer-lines
+#---------------------------------- VTR300 Schedule - Temperature offset during inactive week (Auto mode)   
+vtr300_sch_inactive_temp_offset_sp:
+  name: Sch. Temp offset inactive week
+  min: -10
+  max: 0
+  step: 0.5
+  mode: slider
+  unit_of_measurement: °C
+  icon: mdi:thermometer-lines    
+
+#---------------------------------- VTR300 Eco offset temp.
+# Skriver modbus verdi via automasjon "vtr300 eco offset - Ønsket offset"
+vtr300_eco_offset_temp_sp:
+  name: Eco offset
+#    initial: 1   
+  min: 0
+  max: 10
+  step: 1
+  mode: box
+  unit_of_measurement: °C
+  icon: mdi:thermometer-lines
+    
+#---------------------------------- VTR300 Ferie modus varighet
+vtr300_ferie_modus_varighet_sp:
+  name: Ferie varighet
+#    initial: 1   
+  min: 1
+  max: 365
+  step: 1
+  mode: box
+  unit_of_measurement: d
+  icon: mdi:briefcase  
+    
+#---------------------------------- VTR300 Borte modus varighet
+vtr300_borte_modus_varighet_sp:
+  name: Borte varighet
+#    initial: 4
+  min: 1
+  max: 72
+  step: 1
+  mode: box
+  unit_of_measurement: t
+  icon: mdi:home-export-outline       
+ 
+#---------------------------------- VTR300 Ildsted modus varighet
+vtr300_ildsted_modus_varighet_sp:
+  name: Ildsted varighet
+#    initial: 1
+  min: 1
+  max: 60
+  step: 1
+  mode: box
+  unit_of_measurement: m
+  icon: mdi:fire  
+    
+#---------------------------------- VTR300 Boost modus varighet
+vtr300_boost_modus_varighet_sp:
+  name: Boost varighet
+#    initial: 1
+  min: 1
+  max: 240
+  step: 1
+  mode: box
+  unit_of_measurement: m
+  icon: mdi:weather-windy 
+    
+#---------------------------------- VTR300 Party modus varighet
+vtr300_party_modus_varighet_sp:
+  name: Party varighet
+#    initial: 1
+  min: 1
+  max: 8
+  step: 1
+  mode: box
+  unit_of_measurement: t
+  icon: mdi:party-popper 
+
+#---------------------------------- VTR300 - Utekompensering - Vifte hastighet kompensering vinter (Y0)
+vtr300_vifte_hast_komp_vinter_sp:
+  name: Vifte komp. vinter
+  min: 0
+  max: 50
+  step: 1
+  mode: box
+  unit_of_measurement: '%'
+#    icon: mdi:
+
+#---------------------------------- VTR300 - Utekompensering - Utetemp vinter (X1) for start vifte kompensering (Y0)
+vtr300_vifte_hast_komp_vinter_start_temp_sp:
+  name: Vifte komp. vinter - Start temp
+  min: -30
+  max: 0
+  step: 1
+  mode: slider
+  unit_of_measurement: °C
+  icon: mdi:thermometer-lines
+
+#---------------------------------- VTR300 - Utekompensering - Utetemp vinter (X0) for maks vifte kompensering (Y0)
+vtr300_vifte_hast_komp_vinter_max_temp_sp:
+  name: Vifte komp. vinter - Max temp
+  min: -30
+  max: 0
+  step: 1
+  mode: slider
+  unit_of_measurement: °C
+  icon: mdi:thermometer-lines
+ 
+#---------------------------------- VTR300 - Utekompensering - Vifte hastighet kompensering sommer (Y1)
+vtr300_vifte_hast_komp_sommer_sp:
+  name: Vifte komp. sommer
+  min: 0
+  max: 50
+  step: 1
+  mode: box
+  unit_of_measurement: '%'
+#    icon: mdi:
+
+#---------------------------------- VTR300 - Utekompensering - Utetemp sommer (X2) for start vifte kompensering (Y1)
+vtr300_vifte_hast_komp_sommer_start_temp_sp:
+  name: Vifte komp. sommer - Start temp
+  min: 15
+  max: 30
+  step: 1
+  mode: slider
+  unit_of_measurement: °C
+  icon: mdi:thermometer-lines
+
+#---------------------------------- VTR300 - Utekompensering - Utetemp sommer (X3) for max vifte kompensering (Y1)
+vtr300_vifte_hast_komp_sommer_max_temp_sp:
+  name: Vifte komp. sommer - Max temp
+  min: 15
+  max: 40
+  step: 1
+  mode: slider
+  unit_of_measurement: °C
+  icon: mdi:thermometer-lines
+  
+#---------------------------------- VTR300 - Utekompensert tilluftstemperatur (X1 --> X6)
+vtr300_tilluftstemp_utekomp_x1:
+  name: X1 utetemp.
+  min: -20
+  max: 30
+  step: 1
+  mode: slider
+  unit_of_measurement: °C
+  icon: mdi:thermometer-lines  
+  
+vtr300_tilluftstemp_utekomp_x2:
+  name: X2 utetemp.
+  min: -20
+  max: 30
+  step: 1
+  mode: slider
+  unit_of_measurement: °C
+  icon: mdi:thermometer-lines   
+
+vtr300_tilluftstemp_utekomp_x3:
+  name: X3 utetemp.
+  min: -20
+  max: 30
+  step: 1
+  mode: slider
+  unit_of_measurement: °C
+  icon: mdi:thermometer-lines    
+  
+vtr300_tilluftstemp_utekomp_x4:
+  name: X4 utetemp.
+  min: -20
+  max: 30
+  step: 1
+  mode: slider
+  unit_of_measurement: °C
+  icon: mdi:thermometer-lines    
+    
+vtr300_tilluftstemp_utekomp_x5:
+  name: X5 utetemp.
+  min: -20
+  max: 30
+  step: 1
+  mode: slider
+  unit_of_measurement: °C
+  icon: mdi:thermometer-lines   
+  
+vtr300_tilluftstemp_utekomp_x6:
+  name: X6 utetemp.
+  min: -20
+  max: 30
+  step: 1
+  mode: slider
+  unit_of_measurement: °C
+  icon: mdi:thermometer-lines  
+  
+#---------------------------------- VTR300 - Utekompensert tilluftstemperatur (Y1 --> Y6)  
+vtr300_tilluftstemp_utekomp_y1:
+  name: Y1 tilluftstemp.
+  min: 10
+  max: 30
+  step: 1
+  mode: slider
+  unit_of_measurement: °C
+  icon: mdi:thermometer-lines  
+
+vtr300_tilluftstemp_utekomp_y2:
+  name: Y2 tilluftstemp.
+  min: 10
+  max: 30
+  step: 1
+  mode: slider
+  unit_of_measurement: °C
+  icon: mdi:thermometer-lines    
+  
+vtr300_tilluftstemp_utekomp_y3:
+  name: Y3 tilluftstemp.
+  min: 10
+  max: 30
+  step: 1
+  mode: slider
+  unit_of_measurement: °C
+  icon: mdi:thermometer-lines    
+  
+vtr300_tilluftstemp_utekomp_y4:
+  name: Y4 tilluftstemp.
+  min: 10
+  max: 30
+  step: 1
+  mode: slider
+  unit_of_measurement: °C
+  icon: mdi:thermometer-lines  
+
+vtr300_tilluftstemp_utekomp_y5:
+  name: Y5 tilluftstemp.
+  min: 10
+  max: 30
+  step: 1
+  mode: slider
+  unit_of_measurement: °C
+  icon: mdi:thermometer-lines    
+  
+vtr300_tilluftstemp_utekomp_y6:
+  name: Y6 tilluftstemp.
+  min: 10
+  max: 30
+  step: 1
+  mode: slider
+  unit_of_measurement: °C
+  icon: mdi:thermometer-lines     
+  
+#---------------------------------- VTR300 - PPM Auto - PPM Lav grense
+vtr300_ppm_auto_ppm_lav_sp:
+  name: PPM Lav grense
+  min: 400
+  max: 2000
+  step: 100
+  mode: slider
+  unit_of_measurement: ppm
+  icon: mdi:molecule-co2
+
+#---------------------------------- VTR300 - PPM Auto - PPM Normal grense
+vtr300_ppm_auto_ppm_normal_sp:
+  name: PPM Normal grense
+  min: 400
+  max: 2000
+  step: 100
+  mode: slider
+  unit_of_measurement: ppm
+  icon: mdi:molecule-co2  
+
+#---------------------------------- VTR300 - PPM Auto - PPM Høy grense  
+vtr300_ppm_auto_ppm_hoy_sp:
+  name: PPM Høy grense
+  min: 400
+  max: 2000
+  step: 100
+  mode: slider
+  unit_of_measurement: ppm
+  icon: mdi:molecule-co2   
+ 
+#---------------------------------- VTR300 - PPM Auto - Fuktighet avtrekk Normal grense  
+vtr300_ppm_auto_moist_normal_sp:
+  name: Fukt Normal grense
+  min: 10
+  max: 80
+  step: 1
+  mode: box
+  unit_of_measurement: '%RF'
+  icon: hass:water-percent
+ 
+#---------------------------------- VTR300 - PPM Auto - Fuktighet avtrekk Høy grense  
+vtr300_ppm_auto_moist_hoy_sp:
+  name: Fukt Høy grense
+  min: 10
+  max: 80
+  step: 1
+  mode: box
+  unit_of_measurement: '%RF'
+  icon: hass:water-percent   
+#---------------------------------- VTR300 - Frikjøling/Nattkjøling (Minimum of highest daytime temperature for start of free cooling) 
+vtr300_freecooling_start_outdoor_daytime_min_temp:
+  name: Min dagtemp for aktivering
+  min: 12
+  max: 30
+  step: 1
+  mode: box
+  unit_of_measurement: °C
+  icon: mdi:thermometer-lines   
+#---------------------------------- VTR300 - Frikjøling/Nattkjøling (Highest night temperature limit for termination free cooling) 
+vtr300_freecooling_stop_outdoor_temp_hi_sp:
+  name: Utetemp. høy grense for deaktivering
+  min: 7
+  max: 30
+  step: 1
+  mode: box
+  unit_of_measurement: °C
+  icon: mdi:thermometer-lines   
+#---------------------------------- VTR300 - Frikjøling/Nattkjøling (Lowest night temperature limit for termination free cooling) 
+vtr300_freecooling_stop_outdoor_temp_lo_sp:
+  name: Utetemp. lav grense for deaktivering
+  min: 7
+  max: 30
+  step: 1
+  mode: box
+  unit_of_measurement: °C
+  icon: mdi:thermometer-lines  
+#---------------------------------- VTR300 - Frikjøling/Nattkjøling (Lowest night temperature limit for termination free cooling) 
+vtr300_freecooling_stop_extractair_temp_lo_sp:
+  name: Avtrekkstemp. lav grense for deaktivering
+  min: 12
+  max: 30
+  step: 1
+  mode: box
+  unit_of_measurement: °C
+  icon: mdi:thermometer-lines   
+#---------------------------------- VTR300 - Kjølegjenvinning (Temperature difference between EAT and OAT at which cooling recovery is allowed) 
+vtr300_cooling_recovery_allow_limit_temp_sp:
+  name: Avtr./ute diff.temp.for tillatt kjølegjenv.
+  min: 0
+  max: 10
+  step: 1
+  mode: box
+  unit_of_measurement: °C
+  icon: mdi:thermometer-lines  
+#---------------------------------- VTR300 - Kjølegjenvinning (Temperature at which cooling is interlocked) NB! GJELDER TROLIG KUN KJØLEBATTERI&KOMBIBATTERI (Changeover)
+#vtr300_cooling_recovery_ilock_temp_sp:
+#  name: Blokker kjølegjenv. ved 
+#  min: 12
+#  max: 25
+#  step: 1
+#  mode: box
+#  unit_of_measurement: °C
+#  icon: mdi:thermometer-lines   
+#---------------------------------- VTR300 - Tilluftsvifte manuell overstyring (Hastighet) 
+vtr300_fan_supply_man_override_spd:
+  name: Tilluftsvifte overstyring hast.
+  min: 0
+  max: 100
+  step: 1
+  mode: box
+  unit_of_measurement: '%'
+  icon: mdi:angle-acute 
+#---------------------------------- VTR300 - Avtrekksvifte manuell overstyring (Hastighet) 
+vtr300_fan_extract_man_override_spd:
+  name: Avtrekksvifte overstyring hast.
+  min: 0
+  max: 100
+  step: 1
+  mode: box
+  unit_of_measurement: '%'
+  icon: mdi:angle-acute    
