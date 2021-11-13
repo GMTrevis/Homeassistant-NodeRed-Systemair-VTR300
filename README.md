@@ -227,7 +227,7 @@ A “map” of the flow in Node Red where modbus read/write is handled, numbered
 ###	Step 1 - Before you begin: 
 - Check if the modbus registers for your ventilation unit is the same as my VTR300, compare your variable list against the modbus variable list in the folder "Modbus".
 - If your local panel is the same type as mine (fig. below), then your ventilation unit most likely uses the same modbus registers as my VTR300. If your panel is of an older/different type, this integration will most likely not work and you should not proceed.
-- ![20210413_064205](https://user-images.githubusercontent.com/69414078/141653530-1145b765-1a61-4766-b2a4-8cab49300e71.jpg)
+- ![20210413_064205](https://github.com/GMTrevis/Homeassistant-NodeRed-Systemair-VTR300/blob/main/Modbus/20210413_064205.jpg)
 
 - If the adr.(modbus registers) in your ventilation unit does not match, then you should not use this integration, because a lot (probably all) of the modbus handling in Node Red has to be re-configured to match the modbus registers for your ventilation unit. 
 
