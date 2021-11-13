@@ -1,0 +1,184 @@
+#*************************************************************************************************************************************************************
+#--------------------------------------------------------------------- SCRIPTS - VTR300 ---------------------------------------------------------------------*
+#*************************************************************************************************************************************************************
+
+#---------------------------------------------------------- VTR300 - Modbus R/W via Node-Red ----------------------------------------------------------------|
+
+
+#-------------------------------- VTR300 AUTO (Schedule) MODUS
+
+vtr300_auto_modus:
+  sequence:
+#----- Aktiver Bool når script er kalt
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.vtr300_auto_modus_status_dummy
+        
+#----- Deaktiver auto dummy 
+vtr300_auto_dummy_av:
+  sequence:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.vtr300_auto_modus_status_dummy
+
+#-------------------------------- VTR300 PARTY MODUS
+ 
+vtr300_party_modus:
+  sequence: 
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.vtr300_party_modus_status_dummy
+
+vtr300_party_dummy_av:
+  sequence:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.vtr300_party_modus_status_dummy
+
+#-------------------------------- VTR300 BOOST MODUS
+vtr300_boost_modus:
+  sequence: 
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.vtr300_boost_modus_status_dummy
+
+vtr300_boost_dummy_av:
+  sequence:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.vtr300_boost_modus_status_dummy
+
+#-------------------------------- VTR300 ILDSTED MODUS
+vtr300_ildsted_modus:
+  sequence: 
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.vtr300_ildsted_modus_status_dummy
+
+vtr300_ildsted_dummy_av:
+  sequence:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.vtr300_ildsted_modus_status_dummy
+
+#-------------------------------- VTR300 BORTE MODUS (minimum hastighet)
+vtr300_borte_modus:
+  sequence:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.vtr300_borte_modus_status_dummy
+
+vtr300_borte_dummy_av:
+  sequence:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.vtr300_borte_modus_status_dummy
+
+#-------------------------------- VTR300 FERIE MODUS (minimum hastighet)
+vtr300_ferie_modus:
+  sequence:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.vtr300_ferie_modus_status_dummy
+
+vtr300_ferie_dummy_av:
+  sequence:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.vtr300_ferie_modus_status_dummy
+
+#-------------------------------- VTR300 MANUEL STOPP(AV) MODUS
+vtr300_man_stopp_modus:
+  sequence:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.vtr300_man_stopp_modus_status_dummy
+
+vtr300_man_stopp_dummy_av:
+  sequence:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.vtr300_man_stopp_modus_status_dummy
+
+#-------------------------------- VTR300 MANUELL LAV MODUS
+vtr300_man_lav_modus:
+  sequence:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.vtr300_man_lav_modus_status_dummy
+
+vtr300_man_lav_dummy_av:
+  sequence:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.vtr300_man_lav_modus_status_dummy
+      
+#-------------------------------- VTR300 MANUEL NORMAL MODUS
+vtr300_man_normal_modus:
+  sequence:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.vtr300_man_normal_modus_status_dummy
+
+vtr300_man_normal_dummy_av:
+  sequence:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.vtr300_man_normal_modus_status_dummy
+
+#-------------------------------- VTR300 MANUEL HØY MODUS
+vtr300_man_hoy_modus:
+  sequence: 
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.vtr300_man_hoy_modus_status_dummy
+
+vtr300_man_hoy_dummy_av:
+  sequence:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.vtr300_man_hoy_modus_status_dummy
+
+#------------------------- VTR300 PPM AUTO ENABLE MODUS
+#Trigger "Input Boolean dummy" pga. "Manuell Lav/Normal/Høy" modus script kalles av "ppm Auto enable" 
+#Aktiverer "manuell modus" pga. "PPM Auto" sjalter kun mellom "Man Lav", "Man Normal", "Man Høy" og "Boost" avhengig av ppm. 
+#"PPM Auto" må toggles AV for å deaktivere fra "PPM Auto" til "Man Lav/Normal/Høy" pga. "PPM Auto" setter aggregat i manuell modus som er samme modbus register som #Manuell Lav/Normal Høy"
+#"Auto schedule" og "Manuell Stopp" deaktiverer "PPM Auto"
+#Aktiverer "Manuell Lav" når "PPM Auto først aktiveres, regulering foregår så ihht. automasjoner.
+
+vtr300_ppm_mode_auto_on: 
+  sequence: 
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.vtr300_ppm_mode_auto_enable_modus_status_dummy
+ 
+
+# -------------------------------- VTR300 PPM AUTO DISABLE MODUS
+vtr300_ppm_mode_auto_off:
+  sequence:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.vtr300_ppm_mode_auto_enable_modus_status_dummy
+#Trigger "Input Boolean dummy" pga. andre MANUELL modus script kjøres for ppm Auto disable.      
+
+#-------------------------------- VTR300 Eco Mode Enable
+vtr300_eco_mode_enable:
+  sequence:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.vtr300_eco_mode_dummy
+
+vtr300_eco_mode_disable:
+  sequence:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.vtr300_eco_mode_dummy
+      
+#-------------------------------- VTR300 - Sync Inernal clock Enable/Disable
+vtr300_set_system_time_enable:
+  sequence:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.vtr300_set_system_time_dummy
+
+vtr300_set_system_time_disable:
+  sequence:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.vtr300_set_system_time_dummy    
+      
+#-------------------------------- VTR300 - Frikjøling/Nattkjøling Enable/Disable
+vtr300_freecooling_on:
+  sequence:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.vtr300_freecooling_dummy
+
+vtr300_freecooling_off:
+  sequence:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.vtr300_freecooling_dummy   
+
+#-------------------------------- VTR300 - Kjølegjenvinning Enable/Disable
+vtr300_cooling_recovery_on:
+  sequence:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.vtr300_cooling_recovery_dummy
+
+vtr300_cooling_recovery_off:
+  sequence:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.vtr300_cooling_recovery_dummy

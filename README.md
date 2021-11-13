@@ -1,5 +1,7 @@
 # Homeassistant-NodeRed-Systemair-VTR300
-Sytemair Save VTR300 integration to Homeassistant, modbus R/W is handled in Node Red.
+Systemair Save VTR300 integration to Homeassistant, modbus R/W is handled in Node Red.
+
+## Intro
 - **Mobile view**
 
 https://user-images.githubusercontent.com/69414078/140788652-341a1d53-b56f-461f-85dd-b349424d7963.mp4
@@ -13,12 +15,10 @@ For further details about your ventilation unit, read the applicable manual by S
 
 ###	System overview: 
 Showing speed, temperatures, moisture, ppm, efficiency (estimated), power (consumption and estimated added power), actual mode and A/B/C alarms.
-- **UI setup:** Picture element and custom:text-element(thanks to @ludeeus). See folder "UI_Config" --> "UI_System_overview.txt" for UI config.
 - ![VTR300_system_overview](https://user-images.githubusercontent.com/69414078/140724408-cf12fe03-ffba-41cf-8b2b-23cc5718db4d.png)
 
 ###	Mode control buttons: 
 Showing state of the actual mode and the current setting/actual time remaining for the applicable “timer modes”. All mode buttons have confirm feature when being set.
-- **UI setup:** Custom button card (thanks to @RomRider), entity card and custom:home-feed-card (thanks to @gadgetchnnel). See folder "UI_Config" --> "UI_Mode_control_buttons.txt" for UI config.
 - ![VTR300_mode_control_buttons](https://github.com/GMTrevis/Homeassistant-NodeRed-Systemair-VTR300/blob/main/Views/VTR300_mode_control_buttons.png)
 - **Auto: “Auto schedule”:**: When active the ventilation speed are running according to the speed given in the schedule properties, ref. pop-up “Auto Sch.”, further displayed in chapter “Pop-up’s”.
 - **PPM Auto:** This is an additional control handled in Node Red which sets the speed of the ventilation unit based on moisture (priority), ppm and presence detection, limits are given in the pop-up “Luftkvalitet”(Air quality) further displayed in chapter “Pop-up’s”.  Modes controlled in Node Red are, Manual low, Manual normal, Manual high and Boost.
@@ -35,7 +35,6 @@ Showing state of the actual mode and the current setting/actual time remaining f
 
 ### Other mode control buttons: 
 Showing state if the feature is enabled on or off.Most mode buttons have confirm feature.
-- **UI setup:** custom:button-card. See folder "UI_Config" --> "UI_Mode_control_buttons.txt" for UI config.
 - ![VTR300_other_mode_control_buttons](https://github.com/GMTrevis/Homeassistant-NodeRed-Systemair-VTR300/blob/main/Views/VTR300_other_mode_control_buttons.png)
 - **Frikjøling/Nattkjøling(Free/Nightcoling):** This feature can help to cool down the house during night. The heatexchanger is of during the period and the fans can be set to a given speed according to the setpoints given in the pop-up. Not a wow effect as normal ventilation units for houses/apartments have low airflow compared to bigger ventilation units, but it can help.
 - **Kjølegjenv(Cooling):** If you by any reason manage to cool down the house so that the extract air temp. is x C° cooler than the in inlet temp. then you can use this feature to make the heat exchanger operate as a cooling-exchanger. My house and ventilation unit is not efficient enough to make any use of this feature. 
@@ -44,12 +43,10 @@ Showing state if the feature is enabled on or off.Most mode buttons have confirm
 
 ###	Neste filterskift (Next filter replacement): 
 Converts the seconds from the modbus register (byte swapped) into months, weeks, days, hours and minutes. Each time filter replacement is confirmed from the ventilation unit local panel, NodeRed store the date and time displayed in the next filter change attributes area.
-- **UI setup:** custom:button-card.See folder "UI_Config" --> "UI_Filter.txt" for UI config.
 - ![VTR300_filter](https://github.com/GMTrevis/Homeassistant-NodeRed-Systemair-VTR300/blob/main/Views/VTR300_filter.png)
 
 ### Supply temperature setpoint (Climate):
 Not really a climate controlled in HA or Node Red as the supply temperature control are handled in the ventilation unit. This is a generic climate configured in HA. “Operasjon” (Operation) only visualize if the heat exchanger is on or off. The temperature setpoint is changed as other climates by clicking the up/down arrows. If the outdoor temperature compensation is active the climate setpoint will be written to from Node Red, displaying the actual setpoint, given by the compensation. 
-- **UI setup:** custom:simple-thermostat (thanks to @nervetattoo).See folder "UI_Config" --> "UI_Climate.txt" for UI config.
 - ![VTR300_climate](https://github.com/GMTrevis/Homeassistant-NodeRed-Systemair-VTR300/blob/main/Views/VTR300_climate.png)
 - **Kalkulert.(Calculated):** The calculated supply (or extract depending on the given regulation type) temperature setpoint, calculated by the outdoor temperature compensation curve.
 - **Aktiv utetemp.(Active outdoor temp. sensor):** This is the outdoor temperature used for the outdoor temperature compensation curve, ref. “Pop-up’s” chapter. The inlet for my ventilation unit is located near the main door on the house, causing dips on the outdoor temperature if the door is open a certain time during the winter. The get rid of the temp. dips, I have another outdoor temp. sensor as a primary sensor (netatmo), if the netamo sensor fails does the VTR300 inlet air temp. sensor take over readings as a secondary device. This feature is controlled in Node Red and automatically sets the temperature setpoint according to the outdoor temperature if the “Utekomp”(Outdoor compensation) is active.
@@ -181,7 +178,7 @@ I’m using the custom component “nordpool” provided by @Hellolol and add th
 - Supply temp. Lo
 - Internal clock hour is off for longer than 10min.
 - Internal clock min. is off for longer than 5min.
-- Triggered by catching all modbus client error and checking that the queue build-up is != low level. This is probably not working as intended.
+- Modbus queue buildup, triggered by catching all modbus client error and checking that the queue build-up is != low level. This is probably not working as intended.
 ### Mobile notifications:
 - A-Alarm
 - B-Alarm
@@ -204,7 +201,10 @@ A “map” of the flow in Node Red where modbus read/write is handled, numbered
 - If you want this feature you will need to change the “Poll state node” providing the actual power consumption of your ventilation unit.
 ### Auto select outdoor temperature sensor:
 - You need to delete or change parts of the flow in section 15.
-
+### Extract air temperauture sensor:
+- This sensor is accessories. If you dont have this sensor installed, then you can delete the flow connected to the node "Avkasttemp. [°C]" in section 2. and the flow connected to the node "Kalk. gjenv.grad (2)" in section 3.
+### Airflow [m³/t]:
+- If you have a different sized ventilation unit than VTR/VSR300, then you need to need to adapt the hardcoded parameter to match your ventilation unit. This is done in the node "Calc. m3/t", in section 3.
 ### Flow context:
 -	If not already enabled/added, you will need to enable/add flow context in your Node Red “settings.js” file configuration file as the modbus read/write handling uses flow context. This will detect (update Node Red/HA setpoints) if settings/setpoints are changed from the ventilation unit local panel. In my case the following are added to my “settings.js” fil:
 ```
@@ -215,66 +215,110 @@ A “map” of the flow in Node Red where modbus read/write is handled, numbered
   }, 
 ```  
 
-## Modbus  setup options
--	You can choose Modbus TCP (Ethernet interface) and Modbus RTU (serial interface), there are also some modbus gateways providing modbus data wirelessly over Wi-Fi, I’m not familiar with this but it might be useful to check out for those where hardwiring not is an option. The modbus registeres (addresses) are the same if using Modbus TCP or modbus RTU.
--	I’m using the IAM gateway and configured “connection mode” set to “Modbus gateway”, by following its manual (Gateway setup in the web interface). If I didn’t have the IAM gateway I would use the Modbus RTU. In my case was modbus tcp the easiest and cleanest method, you must choose the modbus setup that suits your installation. If you setup the IAM gateway using modbus, then you won’t be able to use the systemair app, you must choose either modbus or the app/cloud.
--	Adresses: Modbus registers are offset by “-1”, see the Note in chapter Installation.
+## Modbus setup options
+- You can choose Modbus TCP (Ethernet interface) and Modbus RTU (serial interface), there are also some modbus gateways providing modbus data wirelessly over Wi-Fi, I’m not familiar with this but it might be useful to check out for those where hardwiring not is an option. The modbus registeres (addresses) are the same if using Modbus TCP or modbus RTU.
+- If using modbus RTU, then you should be able use both the Systemair app/cluod and the modbus interface. 
+- I’m using the IAM gateway and configured “connection mode” set to “Modbus gateway”, by following its manual (Gateway setup in the web interface). If I didn’t have the IAM gateway I would use the Modbus RTU. In my case was modbus tcp the easiest and cleanest method, you must choose the modbus setup that suits your installation. If you setup the IAM gateway using modbus, then you won’t be able to use the systemair app/cloud, you must choose either modbus or the app/cloud.
+- Adresses: Modbus registers are offset by “-1”, see the Note in chapter Installation.
 
 
 ## Installation:
 
-###	Before you begin: 
-- You should have your modbus TCP or Modbus RTU setup and configured, you should also make sure that your ventilation unit uses the same modbus registers as my setup. There are various modbus tools available to check that you can read data from the modbus registers over modbus TCP and modbus RTU, this is not a must but it’s always nice to know if the modbus connection are ok or not (easier to start trouble shooting). If you are not certain that the modbus registers on your ventilation unit is the same as this setup, then you should do spot checks reading modbus registers and verify that the registers are the very same as this setup, ref. the pdf modbus adr. list for my VTR300 in the folder "Views". If the adr. in your ventilation unit does not match, then you should not use this integration, because a lot of the modbus handling in Node Red has to be re-configured to match the modbus registers for your ventilation system. I have been using the “modscan” modbus tool for reading modbus data (a lot of trial and error… and success in the end!).
-- NOTE! The modbus addresses in the systemair documentation has an offset of “-1”. That means if you are trying to read the supply temperature by reading modbus register 12103 (from the manual), then you will need to read modbus register 12102 (12103-1=12102), this applies to all modbus registers. 
-- Node Red : This addon need to be installed as all modbus read and write are done using Node Red. You will also need to install some additional nodes like “node-red-contrib-cron-plus” and a few others. You will see which nodes that are missing when you have imported the VTR300 Node Red flow, you can then install the missing nodes through Manage palette  Install.
+###	Step 1 - Before you begin: 
+- Check if the modbus registers for your ventilation unit is the same as my VTR300, compare your variable list against the modbus variable list in the folder "Modbus".
+- If your local panel is the same type as mine (fig. below), then your ventilation unit most likely uses the same modbus registers as my VTR300. If your panel is of an older/different type, this integration will most likely not work and you should not proceed.
+- If the adr.(modbus registers) in your ventilation unit does not match, then you should not use this integration, because a lot (probably all) of the modbus handling in Node Red has to be re-configured to match the modbus registers for your ventilation unit. 
 
-### HA and Node Red manual installation: 
-This is not as smooth as I would like it to be as it is a manual installation, but it’s not hard either.Copy the following yaml configurations to tour configuration:
-- Configuration (Generally include and climate, need to be adapted to your configuration if you want I your way).
-- input_boolean_vtr300
-- input_datetime_vtr300
-- input_number_vtr300
-- input_select_vtr300
-- scripts_vtr300
-- scripts_poup_ vtr300
-- sensors_time_date_misc (only a few of them are being used).
-- switches_vtr300
-- customize_vtr300 (If you want icon state changes, the ppm entities must be adapted to your setup)
-- customize_global (If you want icon state changes)
-#### UI .png files
+###	Step 2 - Check modbus registers:
+- You should have your modbus TCP or Modbus RTU setup and configured, you should also make sure that your ventilation unit uses the same modbus registers as my setup. There are various modbus tools available to check that you can read data from the modbus registers over modbus TCP and modbus RTU, this is not a must but it’s always nice to know if the modbus connection are ok or not (easier to start trouble shooting if you need to). 
+	- I have been using the “modscan” modbus tool for reading modbus data (a lot of trial and error… and success in the end!).
+- If you are not certain that the modbus registers on your ventilation unit is the same as this setup, then you should do spot checks by reading modbus registers (for your ventilation unit) and verify that the modbus registers are the very same as this setup, ref. the modbus variable list for my VTR300 in the folder "Modbus". 
+- NOTE! The modbus addresses in the systemair documentation has an offset of “-1”. That means if you are trying to read the supply temperature by reading modbus register 12103 (from the manual), then you will need to read modbus register 12102 (12103-1=12102), this applies to all modbus registers. 
+
+### Step 3 - HA custom interface and integraions:
+If using the same UI config as mine, then you will need to install the following custom UI integrations and interfaces, they're all availble in HACS.
+#### Step 3.1 - Custom integrations:
+- browser_mod (thanks to @thomasloven)
+- nordpool (thanks to @Hellowlol)
+#### Step 3.2 - Custom interface:
+- custom:button-card (thanks to @RomRider)
+- custom:text-element(thanks to @ludeeus)
+- custom:simple-thermostat (thanks to @nervetattoo)
+- custom:bar-card (thanks to @Gluwc)
+- custom:multiple-entity-row (thanks to @benct)
+- custom:mini-graph-card (thanks to @RomRider)
+- custom:home-feed-card (thanks to @gadgetchnnel)
+- custom-ui (thanks to @Mariusthvdb)
+
+
+### Step 4 - HA manual installation: 
+This is not as smooth as I would like it to be as it is a manual installation, but it’s not hard either.
+If you want to use my way of splitting up the configuration, copy the folder including the yaml files (folder and .yaml file). If so, then you must also use the same "include" config as given in my configuration.yaml file:
+Copy the following .yaml configurations to your configuration (or folders incl..yaml file, if you want my way of splitting up the config.). 
+- Configuration (Generally "include" and "climate", need to be adapted to your configuration if you want it your way).
+- input_boolean
+- input_datetime
+- input_number
+- input_select
+- scripts
+- sensors (only a few of them are being used).
+- switches
+- customize (If you want icon state changes, the ppm entities must be adapted to your setup)
+- global (If you want icon state changes)
+#### Step 4.1 - UI .png files
 Copy the .png files to your dedicated "picture" folder, I have mine in the following folders www -> images -> VTR300
-- VTR300_flytskjema_A
-- VTR300_utekomp_03e
-- VTR300_utekomp_tilluft_B
-	
-#### Import the following Node Red flows:
+- www
+
+### Step 5 - Node Red manual installation: 
+- Node Red addon need to be installed as all modbus read and write are done using Node Red. You will also need to install some additional nodes like “node-red-contrib-cron-plus” and a few others. You will see which nodes that are missing when you have imported the VTR300 Node Red flow, you can then install the missing nodes through Manage palette -> Install.
+- Ensure that you have enabled "Flow context" in your Node Red setup, see chapter "Flow context" above.
+#### Step 5.1 - Import Node Red flow
+Import the following Node Red flows:
 - vtr300.json
 - glob_time.json
-#### Modbus Client: 
+
+#### Step 5.2 - Modbus Client: 
 Click the “Configuration nodes” in the upper right corner in the flow page and configure the modbus client node according to your setup, you need to change the “Type” (if not using TCP) and “Host” .
 - **IP address:**  If you use a different IP as you most likely are, then you also need to change the IP in all the function nodes called “Modbus read” and “Modbus write”.
 If you use a different slave adr. as you maybe are, then you also need to change the “addresses” in all the function nodes called “Modbus read” and “Modbus write”.
 - **Install missing nodes:** Then install the nodes that are missing through Manage palette  Install.
-#### Before deploy: 
+#### Step 5.3 - Before deploy: 
 - 1. I would disable all modbus write nodes, this applies to all Modbus –Flex-Write-Nodes marked “(w)” on the applicable nodes, this is done by double clicking the node and click the “Enabled” on the lower left corner, it will then change to “Disabled”. It is a few nodes and this should prevent writing “default” values/setpoints from HA to the ventilation unit. The setpoints in HA should now be updated by the ventilation unit. 
+**Tip!** You can group all applicable nodes and enable/diable them when grouped. Check/adapt your "Keyboard shortcuts" in the upper right corner in Node Red.
 - 2. You will need to change some nodes, ref. chapter “Node Red “Map””.
 
-#### Ready for deploy: 
-- When all the Modbus –Flex-Write-Nodes marked “(w)” are disabled, then you can deploy if the is no error in HA or Node Red.
-#### Enable modbus write nodes:
+#### Step 5.4 - Ready for deploy: 
+- When all the Modbus –Flex-Write-Nodes marked “(w)” are disabled, then you can deploy if there is no error in HA or Node Red.
+
+#### Step 5.5 - Enable modbus write nodes:
 - When all the setpoint for the ventilation unit is updated in HA (by the ventilation unit), then you can Enable all the Modbus –Flex-Write-Nodes marked “(w)”, then you can deploy. 
-- Note! You should change the “Deploy” option to “Modified Nodes”, to only deploy the nodes that have been changed. I have seen that deploying all nodes (Full) have stopped the modbus communication, changing to “Modified Nodes” have eliminated this issue for me. If the modbus communication should stop, a restart of Node Red addon re-established the modbus communication for me when using deployning everything in the workspace.
+- **Note!** You should change the “Deploy” option to “Modified Nodes”, to only deploy the nodes that have been changed. I have seen that deploying all nodes (Full) have stopped the modbus communication, changing to “Modified Nodes” have eliminated this issue for me. If the modbus communication should stop, a restart of Node Red addon re-established the modbus communication for me when using deployning everything in the workspace.
 
 You should now have quite a lot of new entities in the Node Red integration.
 
-## Air inlet – Insect net cover:
-- Due to surrounding lights near the inlet, my ventilation system get some insects in the filters. Probably not a big deal, but to try to get less insects and extend the filter change periods I made a simple model in Fusion 360 and printed a cover with magnets (glued)  and a hand cut insect net or similar. This filter is vacuum cleaned twice a month or so and minimize insects in the airfilter. This model was made first time using Fusion 360 and 3D printer, the model have potential of being improved, but it works very well for its intension. In my case I open the door, take a step out and start the vacuum cleaner. 
-- ![Inlet_cover_outside](https://github.com/GMTrevis/Homeassistant-NodeRed-Systemair-VTR300/blob/main/Views/Inlet_cover_outside.png)
-- ![Inlet_cover_inside](https://github.com/GMTrevis/Homeassistant-NodeRed-Systemair-VTR300/blob/main/Views/Inlet_cover_inside.png)
+### Step 6 - HA UI manual installation:
+If using the same UI cinfig as mine, do the following:
+- In your applicable UI view: Edit your userinterface -> Add card -> scroll down and select "Manual" -> Copy the UI config from the folder "UI_config. Repeat the steps, one card for each config (.txt file). This applies to the following UI_config files:
+	- UI_Climate.txt
+	- UI_Energy_cost_graph.txt
+	- UI_Energy_graph.txt
+	- UI_Filter.txt
+	- UI_Mode_control_buttons.txt
+	- UI_Other_modes_popups.txt
+	- UI_Power_graph.txt
+	- UI_System_overview.txt
+
+### Step 7 - The end is near:
+You should now be finished but probably need to make som adjustments/changes in Node Red due to som points i have forgotten to mention in this readme or because you have missed some details.
 
 ## Remarks:
-This Systemair Save VTR300 integration has now been running for about a year, started out as a clean HA modbus integration. In order to get “all” the available features integrated as well as additional control (PPM Auto, Outdoor temp. compensation ++), all the modbus handling was re-located to Node Red, with trail and error along the way. Not everything is fully tested and cannot be expected to be 100% bulletproof but its working as it should in my case. The most time consuming part of the integration was to get control of the modbus registers. This is the first time creating a repo. In github, the approach could probably have been done better.
+- This Systemair Save VTR300 integration has now been running for about a year, started out as a clean HA modbus integration. In order to get “all” the available features integrated as well as additional control (PPM Auto, Outdoor temp. compensation ++), all the modbus handling was re-located to Node Red, with trail and error along the way. 
+- Not everything is fully tested and cannot be expected to be 100% bulletproof but its working as it should in my case. The most time consuming part of the integration was to get control of the modbus registers. 
+- This is the first time creating a repo. In github, the approach could probably have been done better.
 
-
+## Air inlet – Insect net cover:
+- Due to surrounding lights near the inlet, my ventilation system get quite a few insects in the filters. Probably not a big deal, but to try to get less insects and extend the filter change periods I made a simple model in Fusion 360 and printed a cover with magnets (glued) and a hand cut insect net or similar. This filter is vacuum cleaned twice a month or so and minimize insects in the airfilter. This model was made first time using Fusion 360 and first time using 3D printer. The model have potential of being improved, but it works very well for its intension. 
+- ![Inlet_cover_outside](https://github.com/GMTrevis/Homeassistant-NodeRed-Systemair-VTR300/blob/main/Views/Inlet_cover_outside.png)
+- ![Inlet_cover_inside](https://github.com/GMTrevis/Homeassistant-NodeRed-Systemair-VTR300/blob/main/Views/Inlet_cover_inside.png)
 
 
