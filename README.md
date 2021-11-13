@@ -186,7 +186,7 @@ I’m using the custom component “nordpool” provided by @Hellolol and add th
 
 ## Node Red “map”:
 A “map” of the flow in Node Red where modbus read/write is handled, numbered to give an idea where you need to modify the flow in Node Red. I might miss some points below, but it will give you a rough idea.
-- ![VTR300_node_red_map](https://github.com/GMTrevis/Homeassistant-NodeRed-Systemair-VTR300/blob/main/Views/VTR300_node_red_map.png)
+- ![VTR300_node_red_map](https://github.com/GMTrevis/Homeassistant-NodeRed-Systemair-VTR300/blob/main/Nodered/VTR300_node_red_map.png)
 
 ### Outdoor temperature compensation:
 - If you don’t want this feature in your flow, you need to modify the following flows shown in the picture below: 1 and 15.
@@ -216,7 +216,7 @@ A “map” of the flow in Node Red where modbus read/write is handled, numbered
 ```  
 
 ## Modbus setup options
-- You can choose Modbus TCP (Ethernet interface) and Modbus RTU (serial interface), there are also some modbus gateways providing modbus data wirelessly over Wi-Fi, I’m not familiar with this but it might be useful to check out for those where hardwiring not is an option. The modbus registeres (addresses) are the same if using Modbus TCP or modbus RTU.
+- You can choose Modbus TCP (Ethernet interface) or Modbus RTU (serial interface), there are also some modbus gateways providing modbus data wirelessly over Wi-Fi, I’m not familiar with this but it might be useful to check out for those where hardwiring not is an option. The modbus registeres (addresses) are the same if using Modbus TCP or modbus RTU.
 - If using modbus RTU, then you should be able use both the Systemair app/cluod and the modbus interface. 
 - I’m using the IAM gateway and configured “connection mode” set to “Modbus gateway”, by following its manual (Gateway setup in the web interface). If I didn’t have the IAM gateway I would use the Modbus RTU. In my case was modbus tcp the easiest and cleanest method, you must choose the modbus setup that suits your installation. If you setup the IAM gateway using modbus, then you won’t be able to use the systemair app/cloud, you must choose either modbus or the app/cloud.
 - Adresses: Modbus registers are offset by “-1”, see the Note in chapter Installation.
@@ -283,10 +283,10 @@ Import the following Node Red flows:
 Click the “Configuration nodes” in the upper right corner in the flow page and configure the modbus client node according to your setup, you need to change the “Type” (if not using TCP) and “Host” .
 - **IP address:**  If you use a different IP as you most likely are, then you also need to change the IP in all the function nodes called “Modbus read” and “Modbus write”.
 If you use a different slave adr. as you maybe are, then you also need to change the “addresses” in all the function nodes called “Modbus read” and “Modbus write”.
-- **Install missing nodes:** Then install the nodes that are missing through Manage palette  Install.
+- **Install missing nodes:** Then install the nodes that are missing through Manage palette -> Install.
 #### Step 5.3 - Before deploy: 
 - 1. I would disable all modbus write nodes, this applies to all Modbus –Flex-Write-Nodes marked “(w)” on the applicable nodes, this is done by double clicking the node and click the “Enabled” on the lower left corner, it will then change to “Disabled”. It is a few nodes and this should prevent writing “default” values/setpoints from HA to the ventilation unit. The setpoints in HA should now be updated by the ventilation unit. 
-**Tip!** You can group all applicable nodes and enable/diable them when grouped. Check/adapt your "Keyboard shortcuts" in the upper right corner in Node Red.
+**Tip!** You can group all applicable nodes and enable/disable them when grouped. Check/adapt your "Keyboard shortcuts" in the upper right corner in Node Red.
 - 2. You will need to change some nodes, ref. chapter “Node Red “Map””.
 
 #### Step 5.4 - Ready for deploy: 
@@ -311,7 +311,7 @@ If using the same UI cinfig as mine, do the following:
 	- UI_System_overview.txt
 
 ### Step 7 - The end is near:
-You should now be finished but probably need to make som adjustments/changes in Node Red due to som points i have forgotten to mention in this readme or because you have missed some details.
+You should now be finished but probably need to make som adjustments/changes in Node Red due to some points i have forgotten to mention in this readme or because you have missed some details.
 
 ## Remarks:
 - This Systemair Save VTR300 integration has now been running for about a year, started out as a clean HA modbus integration. In order to get “all” the available features integrated as well as additional control (PPM Auto, Outdoor temp. compensation ++), all the modbus handling was re-located to Node Red, with trail and error along the way. 
