@@ -20,7 +20,7 @@ Showing speed, temperatures, moisture, ppm, efficiency (estimated), power (consu
 ###	Mode control buttons: 
 Showing state of the actual mode and the current setting/actual time remaining for the applicable “timer modes”. All mode buttons have confirm feature when being set.
 - ![VTR300_mode_control_buttons](https://github.com/GMTrevis/Homeassistant-NodeRed-Systemair-VTR300/blob/main/Views/VTR300_mode_control_buttons.png)
-- **Auto: “Auto schedule”:**: When active the ventilation speed are running according to the speed given in the schedule properties, ref. pop-up “Auto Sch.”, further displayed in chapter “Pop-up’s”.
+- **Auto: “Auto schedule”:** When active the ventilation speed are running according to the speed given in the schedule properties, ref. pop-up “Auto Sch.”, further displayed in chapter “Pop-up’s”.
 - **PPM Auto:** This is an additional control handled in Node Red which sets the speed of the ventilation unit based on moisture (priority), ppm and presence detection, limits are given in the pop-up “Luftkvalitet”(Air quality) further displayed in chapter “Pop-up’s”.  Modes controlled in Node Red are, Manual low, Manual normal, Manual high and Boost.
 - **Borte (Away):** Time limits are given in the pop-up “Varighet” (Duration) further displayed in chapter “Pop-up’s”.
 - **Ferie (Vacation):** Time limits are given in the pop-up “Varighet” (Duration) further displayed in chapter “Pop-up’s”.
@@ -28,7 +28,7 @@ Showing state of the actual mode and the current setting/actual time remaining f
 - **Normal (Manual Normal speed):** Sets the fans in normal speed, PPM Auto must be deselected as PPM Auto writes to the manual mode speed modbus register.
 - **Høy (Manual High speed):** Sets the fans in high speed, PPM Auto must be deselected as PPM Auto writes to the manual mode speed modbus register.
 - **Party:** Sets the fans in full speed (100%). PPM Auto will be set to standby if active prior to selecting “Party”. Time limits are given in the pop-up “Varighet” (Duration) further displayed in chapter “Pop-up’s”.
-- **Boost:** Sets the fans in full speed (100%). PPM Auto will be set to standby if active prior to selecting “Boost”. Time limits are given in the pop-up “Varighet” (Duration) further displayed in chapter “Pop-up’s”.
+- **Boost:** Sets the supplyfan to full speed and extract fan to minimum. PPM Auto will be set to standby if active prior to selecting “Boost”. Time limits are given in the pop-up “Varighet” (Duration) further displayed in chapter “Pop-up’s”.
 - **Ildsted (Fireplace):** Sets the fans in full speed (100%). PPM Auto will be set to standby if active prior to selecting “Ildsted”. Time limits are given in the pop-up “Varighet” (Duration) further displayed in chapter “Pop-up’s”.
 - **Stopp (Off):** Switch the ventilation unit to off (fans 0%). PPM Auto will be switched off if active prior to selecting “Stopp”. Mostly used when changing filters, for more comprehensive maintenance remember to cut the main power supply for safety reasons.
 - **Komfyravtrekk (cooker etc.):** including other “DI” inputs are overriding all other operator given modes. This as most other features, are handled in the ventilation unit controller.
